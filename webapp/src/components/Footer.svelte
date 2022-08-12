@@ -130,6 +130,7 @@
     #cordelia-nav-footer {
         display: flex;
         padding: var(--footer-top-padding) 0 0 10%;
+        z-index: 5;
     }
     
     #cnf-content-wrapper {

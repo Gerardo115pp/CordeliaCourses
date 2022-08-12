@@ -22,3 +22,29 @@ export class LoginRequest {
         alert(`LoginRequest: ${this.toJson()}`);
     }
 }
+
+export class SignUpRequest {
+    constructor() {
+        this.name = "";
+        this.email = "";
+        this.password = "";
+    }
+
+    toJson = attributesToJson.bind(this);
+
+    do = () => {
+        alert(`SignUpRequest: ${this.toJson()}`);
+    }
+}
+
+export class PasswordRecoveryRequest {
+    constructor() {
+        this.email = "";
+    }
+
+    toJson = attributesToJson.bind(this);
+
+    do = () => {
+        alert(`PasswordRecoveryRequest: ${this.toJson()}`);
+    }
+}

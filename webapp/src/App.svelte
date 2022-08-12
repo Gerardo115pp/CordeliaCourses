@@ -14,12 +14,15 @@
         --theme-light-two-color: #464C4E;
         --theme-three-color: #FCF9F2;
         --theme-four-color: #EBD8CA;
+        --theme-dark-four-color: #EEE3CC5A;
+        --theme-five-color: #AD8E79;
+        --theme-light-five-color: #e6cdbc;
         --dark-color: black;
         --dark-light-color: #00000080;
         --clear-color: #F3F4F1;
-        --theme-gradient: linear-gradient(270deg, #F3F4F1 0%, #E6E2DF 100%)
+        --theme-gradient: linear-gradient(270deg, #F3F4F1 0%, #E6E2DF 100%);
         --danger: #E87156;
-        --ready: #ccff6c;
+        --ready: #62C77A;
         --trasparent-theme-color: #ccff6c88;
         --dark-tranparent-background: rgba(0, 0, 0, 0.3);
         
@@ -131,6 +134,21 @@
             text-transform: lowercase;
         }
 
+        :global(.full-two-btn) {
+            font-family: var(--font-text);
+            box-sizing: border-box;
+            padding: var(--spacing-2) var(--spacing-h3);
+            color: var(--clear-color);
+            background-color: var(--theme-five-color);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: var(--btn-font-size);
+            border: none;
+            box-shadow: 0px 5px 4px 1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            text-transform: lowercase;
+        }
+
         :global(.cordelia-ruiz-brand-label) {
             font-family: var(--font-titles);
             font-weight: 500;
@@ -171,6 +189,13 @@
             :global(.full-btn:hover) {
                 background-color: var(--theme-four-color);
                 color: var(--theme-color);
+                transform: scale(1.05);
+                box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.18);
+            }
+
+            :global(.full-two-btn:hover) {
+                background-color: var(--theme-light-five-color);
+                color: var(--theme-five-color);
                 transform: scale(1.05);
                 box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.18);
             }
