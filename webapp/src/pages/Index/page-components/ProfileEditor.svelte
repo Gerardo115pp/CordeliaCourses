@@ -8,7 +8,7 @@
         username: 'ILSEESPINO',
         name: 'ilse espino',
         address: 'Monterrey, N.L.',
-        email: 'tutialapendeja@gmail.com',
+        email: 'ilse_espino@gmail.com',
         phone: '34564234',
         postal_code: '45079',
     };
@@ -47,7 +47,7 @@
         </div>
         <div id="pew-udc-user-data">
             <h3 id="pew-udc-ud-name">{user_data.name}</h3>
-            <p id="pew-udc-ud-address">{user_data.address}</p>
+            <p id="pew-udc-ud-address">{user_data.email}</p>
         </div>
     </div>
     <div id="pew-data-editor">

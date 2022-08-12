@@ -27,6 +27,9 @@
                 <div class="cn-navoption">
                     <a href="https://cordeliaruiz.com/contacto/">contacto</a>
                 </div>
+                <div class="cn-navoption">
+                    <a href="https://cordeliaruiz.com/contacto/">serie tendencias</a>
+                </div>
             </div>
         </div>
         <div id="cn-aside-navoptions">
@@ -84,7 +87,7 @@
     }
 
     #cn-navoptions-container {
-        width: 18%;
+        width: 28%;
         display: flex;
         margin: 0 auto;
         justify-content: space-around;

@@ -31,6 +31,7 @@
 
         width: 100%;
         position: relative;
+        box-sizing: border-box;
         height: var(--ccp-page-height);
         overflow-x: hidden;
         max-width: 100%;
