@@ -5,3 +5,6 @@ images/
 phal_webapp/
 /**/resources/
 data/
+/**/build/
+webapp/*.zip
+webapp/*.sh

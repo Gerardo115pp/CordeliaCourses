@@ -2,6 +2,7 @@
     import radagon_icon from "../../icons/Degradado4.svg";
     import law_of_regression from "../../icons/Degradado9.svg";
     import SideBar from "./page-components/SideBar.svelte";
+    import CourseHeader from "./page-components/CourseHeader.svelte";
 
     window.scrollTo(0, 0);
 
@@ -10,6 +11,7 @@
 </script>
 
 <main id="course-details-page">
+    <CourseHeader/>
     <div id="radagon-icon" class="erdtree">
         {@html radagon_icon}
     </div>
@@ -55,13 +57,14 @@
 
         box-sizing: border-box;
         position: relative;
+        display: flex;
         overflow-x: hidden;
         width: 100%;
         max-width: 100%;
-        display: flex;
+        flex-direction: column;
         min-height: var(--ccp-page-height);
         background-color: var(--theme-three-color);
-        justify-content: center;
+        align-items: center;
         padding: calc(var(--spacing-h1) * .5) calc(var(--spacing-h1) * 2.5);
     }
 

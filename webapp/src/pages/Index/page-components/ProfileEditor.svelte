@@ -50,21 +50,6 @@
             <p id="pew-udc-ud-address">{user_data.email}</p>
         </div>
     </div>
-    <div id="pew-data-editor">
-        <form>
-            {#each form_data as field}
-                <Input
-                    field_data={field}
-                    isClear={true}
-                    isSquared={true}
-                    input_label={field.name}
-                    onEnterPressed={verifyProfileForm}
-                    onBlur={verifyProfileForm}
-                />
-            {/each}
-            <button class="full-two-btn">Guardar Cambios</button>
-        </form>
-    </div>
 </div>
 
 <style>
@@ -130,16 +115,6 @@
     /*=============================================
     =            User data editor            =
     =============================================*/
-    
-    #pew-data-editor form{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: var(--spacing-h2);
-    }
-
-    #pew-data-editor form button {
-        width: 70%;
-    }
     
     
     /*=====  End of User data editor  ======*/

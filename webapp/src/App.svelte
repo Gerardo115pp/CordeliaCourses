@@ -32,7 +32,7 @@
         --font-titles: 'ivymode', cursive;
         --font-text: 'commuters-sans', sans-serif;
 
-        --font-size-1: 12px;
+        --font-size-1: 11px;
         --font-size-2: calc(var(--font-size-1) + calc(var(--font-size-1) * 0.55));
         --font-size-3: calc(var(--font-size-1) + calc(var(--font-size-1) * 0.7));
         --font-size-4: calc(var(--font-size-1) + calc(var(--font-size-1) * 1.1));
@@ -60,7 +60,7 @@
         --navbar-height: 22.172949002217294vh; /* Not used yet */
         --footer-height: 56.72vh; /* Not used yet */
         --boxes-roundness: 6px;
-        --letter-spacing: 0.0208vw;
+        --letter-spacing: 0.39936px;
         letter-spacing: var(--letter-spacing);
 
     }

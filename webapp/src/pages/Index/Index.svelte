@@ -8,7 +8,7 @@
     
 </script>
 
-
+<!-- Flor -->
 <main id="cordelia-courses-page">
     <div id="radagon-icon" class="erdtree">
         {@html radagon_icon}
@@ -27,12 +27,12 @@
 
 <style>
     #cordelia-courses-page {
-        --ccp-page-height: 285.93vh;
+        --ccp-page-height: 235.93vh;
 
         width: 100%;
         position: relative;
         box-sizing: border-box;
-        height: var(--ccp-page-height);
+        min-height: var(--ccp-page-height);
         overflow-x: hidden;
         max-width: 100%;
         background-color: var(--theme-three-color);
