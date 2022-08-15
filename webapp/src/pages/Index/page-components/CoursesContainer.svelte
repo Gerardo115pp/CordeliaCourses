@@ -51,7 +51,7 @@
         background: var(--theme-dark-four-color);
         grid-template-columns: 1fr;
         row-gap: var(--ccc-grid-gap);
-        padding: var(--ccc-grid-gap);
+        padding: var(--ccc-grid-gap) var(--spacing-2);
     }
 
     /* #cordelia-customer-courses * {
@@ -108,5 +108,52 @@
         color: var(--dark-light-color);
     }
 
+    @media only screen and (max-width: 768px) {
+        #cordelia-customer-courses {
+            --ccc-grid-gap: var(--spacing-4);
+            width: 100%;
+        }
 
+        .course-item-wrapper {
+            display: grid;
+            box-sizing: border-box;
+            width: 100%;
+            background: white;
+            border-radius: var(--boxes-roundness);
+            padding: var(--spacing-h3) var(--ccc-grid-gap);
+            height: auto;
+            grid-template: 50vw repeat(2, 20vw) / repeat(1, 1fr);
+            gap: var(--spacing-2);
+        }
+
+        .course-thumbnail {
+            grid-area: 1/ 1/ 2/ 2;
+        }
+
+        .course-thumbnail img {
+            width: 100%;
+            border-radius: var(--boxes-roundness);
+            height: 100%;
+            object-fit: fill;
+        }      
+
+        .course-title {
+            display: flex;
+            cursor: pointer;
+            grid-area: 2/ 1/ 3/ 2;
+            font-size: var(--font-size-2);
+            align-items: center;
+            color: var(--theme-color);
+        }
+
+        .course-title h2 {
+            max-width: 74vw;
+        }
+
+        .course-description {
+            grid-area: 3/ 1/ 4/ 2;
+            font-size: var(--font-size-2);
+            color: var(--dark-light-color);
+        }      
+    }
 </style>

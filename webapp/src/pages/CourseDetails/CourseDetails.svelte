@@ -11,7 +11,6 @@
 </script>
 
 <main id="course-details-page">
-    <CourseHeader/>
     <div id="radagon-icon" class="erdtree">
         {@html radagon_icon}
     </div>
@@ -19,7 +18,9 @@
         {@html law_of_regression}
     </div>
     <div id="cdp-page-content">
-        <div id="cdp-pc-course-header"></div>
+        <div id="cdp-pc-course-header">
+            <CourseHeader/>
+        </div>
         <div id="cdp-pc-course-panel">
             <div id="cdp-cp-video-wrapper">
                 <div id="cdp-cp-vw-media">
@@ -58,11 +59,11 @@
         box-sizing: border-box;
         position: relative;
         display: flex;
-        overflow-x: hidden;
+        overflow: hidden;
         width: 100%;
         max-width: 100%;
         flex-direction: column;
-        min-height: var(--ccp-page-height);
+        /* min-height: var(--ccp-page-height); */
         background-color: var(--theme-three-color);
         align-items: center;
         padding: calc(var(--spacing-h1) * .5) calc(var(--spacing-h1) * 2.5);
@@ -99,6 +100,11 @@
     #cdp-page-content {
         width: 100%;
     }
+
+    #cdp-pc-course-header {
+        position: relative;
+        z-index: 2;
+    }
     
     #cdp-pc-course-panel {
         display: grid;
@@ -106,14 +112,14 @@
         width: 100%;
         grid-template: repeat(8, 1fr) / repeat(6, 1fr);
         grid-template-areas: 
-            'video-player video-player video-player video-player course-sidebar course-sidebar'
-            'video-player video-player video-player video-player course-sidebar course-sidebar'
-            'video-player video-player video-player video-player course-sidebar course-sidebar'
-            'video-player video-player video-player video-player course-sidebar course-sidebar'
-            'course-controls-tabs course-controls-tabs course-controls-tabs course-controls-tabs course-sidebar course-sidebar'
-            'course-controls course-controls course-controls course-controls course-sidebar course-sidebar'
-            'course-controls course-controls course-controls course-controls course-sidebar course-sidebar'
-            'course-controls course-controls course-controls course-controls course-sidebar course-sidebar';
+            'vvv vvv vvv vvv sss sss'
+            'vvv vvv vvv vvv sss sss'
+            'vvv vvv vvv vvv sss sss'
+            'vvv vvv vvv vvv sss sss'
+            'ttt ttt ttt ttt sss sss'
+            'ccc ccc ccc ccc sss sss'
+            'ccc ccc ccc ccc sss sss'
+            'ccc ccc ccc ccc sss sss';
         }
         
     /* #cdp-pc-course-panel * {
@@ -124,14 +130,13 @@
     /* Video Wrapper */
 
     #cdp-cp-video-wrapper {
-        grid-area: video-player;
+        grid-area: vvv;
     }
 
     #cdp-cp-vw-media {
         box-sizing: border-box;
         width: 100%;
         height: 100%;
-        background: var(--theme-color);
     }
 
     #cdp-cp-video-wrapper img {
@@ -147,7 +152,7 @@
     #cdp-cp-sidepanel {
         position: relative;
         background: white;
-        grid-area: course-sidebar;
+        grid-area: sss;
         z-index: 3;
     }
     
@@ -156,7 +161,7 @@
     #cdp-cp-tabs {
         display: flex;
         box-sizing: border-box;
-        grid-area: course-controls-tabs;
+        grid-area: ttt;
         padding: 0 var(--spacing-h2);
         align-items: center;
     }
@@ -178,7 +183,7 @@
     /* Controls */
 
     #cdp-cp-controls {
-        grid-area: course-controls;
+        grid-area: ccc;
     }
 
     .cdp-cp-dc-title {
@@ -192,6 +197,90 @@
         width: 90%;
         font-size: var(--font-size-2);
         color: var(--dark-light-color);
+    }
+
+    @media only screen and (max-width: 768px) {
+        #radagon-icon {
+            top: 0%;
+            left: -10%;
+        }
+
+        #course-details-page {
+            --ccp-page-height: 270vh;
+
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            flex-direction: column;
+            padding: calc(var(--spacing-h1) * .5) 0;
+        }
+
+        #cdp-pc-course-panel {
+            position: relative;
+            display: grid;
+            height: var(--ccp-page-height);
+            width: 100%;
+            z-index: 2;
+            grid-template: repeat(25, 1fr) / repeat(3, 1fr);
+            grid-template-areas: 
+                'vvv vvv vvv'
+                'vvv vvv vvv'
+                'vvv vvv vvv'
+                'vvv vvv vvv'
+                'ttt ttt ttt'
+                'ttt ttt ttt'
+                'ccc ccc ccc'
+                'ccc ccc ccc'
+                'ccc ccc ccc'
+                'ccc ccc ccc'
+                'ccc ccc ccc'
+                'ccc ccc ccc'
+                'ccc ccc ccc'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                'sss sss sss'
+                ;
+        }
+
+        #cdp-cp-vw-media {
+            padding: var(--spacing-2);
+        }
+
+        #cdp-cp-video-wrapper img {
+            border-radius: var(--boxes-roundness);
+        }
+
+        #cdp-cp-tabs {
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-2);
+            align-items: center;
+        }
+
+        .cdp-cp-tab {
+            font-size: var(--font-size-1);
+            color: var(--dark-light-color);
+            margin: var(--spacing-2) 0;
+            transition: all .1s ease-in-out;
+        }
+
+        #cdp-cp-controls {
+            padding: var(--spacing-3);
+        }
     }
 
 </style>

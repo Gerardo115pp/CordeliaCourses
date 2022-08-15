@@ -73,7 +73,7 @@
         background: var(--theme-color);
         grid-template-columns: repeat(2, 1fr);
         color: var(--theme-three-color);
-        height: var(--footer-height);
+        min-height: var(--footer-height);
     }
 
     
@@ -82,12 +82,12 @@
     =============================================*/
     
     
-        #cordelia-brand-wrapper {
-            display: flex;
-            justify-content: center;
-            padding: var(--footer-top-padding);
-            border-right: 1px solid var(--theme-three-color);
-        }
+        #cordelia-brand-wrapper      {
+                display: flex;
+                justify-content: center;
+                padding: var(--footer-top-padding);
+                border-right: 1px solid var(--theme-three-color);
+            }
 
         #cbw-wrapper {
             height: 36%;
@@ -180,40 +180,62 @@
     }
     /*=====  End of Footer Navs  ======*/
     
-    
+    @media only screen and (max-width: 768px) {
+        #cordelia-footer {
+            --footer-top-padding: 27vw;
+            grid-template-columns: 1fr;
+        }
 
-    /* 
+        #cordelia-brand-wrapper {
+            padding: var(--footer-top-padding) 0;
+            border-right: none;
+            border-bottom: 1px solid var(--theme-three-color);
+        }
 
-    #cnf-cw-navoptions-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
+        #cbw-wrapper {
+            height: 66%;
+        }
+
+        #cbw-socials-wrapper {
+            display: flex;
+            width: max-content;
+            margin: var(--spacing-3) auto 0;
+            align-items: center;    
+        }
+
+        #cnf-content-wrapper {
+            width: 100%;
+        }
+        
+        #cnf-cw-navoptions-container {
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        #cnf-cw-navoptions-container .cnf-cw-navoption-wrapper {
+            margin-bottom: var(--spacing-3);
+        }
+        
+        #cnf-cw-navoptions-container .cnf-cw-navoption-suboptions-wrapper {
+            grid-template-columns: 1fr;
+        }
+        
+        #cnf-cw-navoptions-container .cnf-cw-navoption-suboptions-wrapper a {
+            margin-bottom: var(--spacing-3);
+        }
+        
+        #cnf-cw-bottom-options {
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        #cnf-cw-bo-wrapper {
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #cnf-cw-bo-wrapper a {
+            margin-bottom: var(--spacing-3);
+        }
     }
-    #cnf-cw-navoption-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-    #cnf-cw-navoption-suboptions-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-    #cnf-cw-bottom-options {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-    #cnf-cw-bo-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-    #cnf-cw-bo-wrapper a {
-         */
 </style>

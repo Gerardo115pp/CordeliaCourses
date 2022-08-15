@@ -32,7 +32,7 @@
         --font-titles: 'ivymode', cursive;
         --font-text: 'commuters-sans', sans-serif;
 
-        --font-size-1: 11px;
+        --font-size-1: 1.2257405515832482vh;
         --font-size-2: calc(var(--font-size-1) + calc(var(--font-size-1) * 0.55));
         --font-size-3: calc(var(--font-size-1) + calc(var(--font-size-1) * 0.7));
         --font-size-4: calc(var(--font-size-1) + calc(var(--font-size-1) * 1.1));
@@ -44,8 +44,7 @@
         
         font-size: var(--font-size-1);
 
-        --btn-font-size: var(--font-size-2);
-
+        
         /* Spacing */
         --spacing-1: 0.6rem;
         --spacing-2: calc(var(--spacing-1) * 2);
@@ -61,7 +60,16 @@
         --footer-height: 56.72vh; /* Not used yet */
         --boxes-roundness: 6px;
         --letter-spacing: 0.39936px;
+        --boxes-shadow: 0px 5px 4px 1px rgba(0, 0, 0, 0.1);
         letter-spacing: var(--letter-spacing);
+        
+        /* buttons */
+        --buttons-padding: var(--spacing-2) var(--spacing-h3);
+        --buttons-text-transform: capitalize;
+        --btn-font-size: var(--font-size-2);
+        --button-roundness: var(--boxes-roundness);
+        --button-shadow: var(--boxes-shadow);
+        --button-font-weight: 500;
 
     }
 
@@ -122,38 +130,38 @@
         :global(.full-btn) {
             font-family: var(--font-text);
             box-sizing: border-box;
-            padding: var(--spacing-2) var(--spacing-h3);
+            padding: var(--buttons-padding);
             color: var(--clear-color);
             background-color: var(--theme-color);
-            border-radius: 8px;
-            font-weight: 500;
+            border-radius: var(--button-roundness);
+            font-weight: var(--button-font-weight);
             font-size: var(--btn-font-size);
             border: none;
-            box-shadow: 0px 5px 4px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--button-shadow);
             transition: all 0.3s ease-in-out;
-            text-transform: lowercase;
+            text-transform: var(--buttons-text-transformt);
         }
 
         :global(.full-two-btn) {
             font-family: var(--font-text);
             box-sizing: border-box;
-            padding: var(--spacing-2) var(--spacing-h3);
+            padding: var(--buttons-padding);
             color: var(--clear-color);
             background-color: var(--theme-five-color);
-            border-radius: 8px;
-            font-weight: 500;
+            border-radius: var(--button-roundness);
+            font-weight: var(--button-font-weight);
             font-size: var(--btn-font-size);
             border: none;
-            box-shadow: 0px 5px 4px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--button-shadow);
             transition: all 0.3s ease-in-out;
-            text-transform: lowercase;
+            text-transform: var(--buttons-text-transformt);
         }
 
         :global(.cordelia-ruiz-brand-label) {
             font-family: var(--font-titles);
             font-weight: 500;
             letter-spacing: 0.656vw;
-            text-transform: uppercase;
+            text-transform: capitalize;
         }
 
         :global(.clear-btn) {
@@ -221,6 +229,41 @@
     
     
     /*=====  End of Theme styles  ======*/
+    
+
+    
+    /*=============================================
+    =            mobile            =
+    =============================================*/
+    
+    @media only screen and (max-width: 768px) {
+        :global(:root) {
+            --font-size-1: 1.3278855975485189vh;
+            --font-size-h1: calc(var(--font-size-1) * 3.5);
+
+            --spacing-1: 2vw;
+            --navbar-height: 12.172949002217294vh; /* Not used yet */
+            --footer-height: 89.72vh; /* Not used yet */
+            --boxes-roundness: 6px;
+            --letter-spacing: 0.39936px;
+
+            --btn-font-size: var(--font-size-2);
+
+            --buttons-padding: var(--spacing-2) var(--spacing-2);
+        }
+
+        :global(.icon-wrapper) {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: var(--spacing-2);
+                margin: 0;
+        }
+        
+    }
+
+    /*=====  End of mobile  ======*/
+    
     
     
 

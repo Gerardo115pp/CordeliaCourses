@@ -91,6 +91,12 @@
     #clp-sf-forgot-password a {
         text-transform: capitalize;
     }
+
+    @media only screen and (max-width: 768px) {
+        #clp-sf-form-controls {
+            grid-template: auto / repeat(1, 1fr);
+        }
+    }
     
 </style>
 

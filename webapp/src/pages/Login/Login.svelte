@@ -53,12 +53,6 @@
         <div id="clp-lf-form-controls">
             <button on:click={() => push("/courses")} id="clp-lf-login-btn" class="full-btn">Iniciar sesion</button>
             <button on:click={() => push("/signup")} id="clp-lf-google-btn" class="full-btn">Registrate con google</button>
-            <div id="clp-lf-remember-user">
-                <div id="clp-lf-ru-input">
-                    <input type="checkbox" id="clp-lf-remember-user-checkbox" />
-                    <label for="clp-lf-remember-user-checkbox">Recordarme</label>
-                </div>
-            </div>
             <div id="clp-lf-forgot-password">
                 <a href="/password" use:link>Olvidé mi contraseña</a>
             </div>
@@ -89,30 +83,30 @@
         gap: var(--spacing-3) var(--spacing-3);
     }
 
-    #clp-lf-remember-user {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-    }
-
-    #clp-lf-ru-input {
-        display: flex;
-        width: 55%;
-        height: 50%;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    #clp-lf-remember-user label {
-        font-family: var(--font-text);
-        font-size: var(--font-size-3);
-    }
-
     #clp-lf-forgot-password {
         text-align: right;
         font-weight: lighter;
         padding: 0 var(--spacing-2) 0 0;
     }
     
+    @media only screen and (max-width: 768px) {
+        #clp-login-form {
+            box-sizing: content-box;
+            padding: var(--spacing-1) 0;
+            width: 90%;
+        }
+
+        #clp-lf-form-controls {
+            grid-template: auto / repeat(1, 1fr);
+        }
+
+        #clp-lf-form-controls * {
+            width: 80%;
+        }
+
+        #clp-lf-forgot-password {
+            text-align: left;
+        }
+    }
 </style>
 

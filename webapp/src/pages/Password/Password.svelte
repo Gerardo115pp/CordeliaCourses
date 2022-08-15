@@ -86,6 +86,30 @@
         grid-template: repeat(2, 1fr) / repeat(2, 1fr);
         gap: var(--spacing-3) var(--spacing-3);
     }
+
+    @media only screen and (max-width: 768px) {
+        #prf-pw-recovery-form {
+            box-sizing: content-box;
+            padding: var(--spacing-1) 0;
+            width: 90%;
+        }
+
+        .password-page-subtitle {
+            margin: var(--spacing-h3) 0;
+        }
+
+        #prf-lf-form-controls {
+            width: 90%;
+            grid-template: auto / repeat(1, 1fr);
+            gap: 0;
+            place-items: center;
+        }
+
+        #prf-lf-form-controls * {
+            width: 100%;
+            margin: 0 auto;
+        }
+    }
     
 </style>
 

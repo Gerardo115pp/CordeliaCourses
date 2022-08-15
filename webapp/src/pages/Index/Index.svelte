@@ -77,4 +77,18 @@
         margin-top: var(--spacing-h1);
     }
     
+    @media only screen and (max-width: 768px) {
+        #cordelia-courses-page {
+            padding: var(--spacing-h3) 0;
+        }
+
+        .erdtree {
+            display: none;
+        }
+
+        #ccp-page-content {
+            width: 100%;
+        }
+    }
+
 </style>

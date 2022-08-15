@@ -181,7 +181,7 @@
     #cds-cl-hp-progress {
         display: grid;
         grid-template: repeat(2, 1fr) / repeat(4, 1fr);
-        row-gap: var(--spacing-2);
+        row-gap: var(--spacing-1);
         color: var(--dark-light-color);
     }
 
@@ -218,7 +218,7 @@
 
     #cds-cl-lectures-container {
         width: 80%;
-        max-height: 25vw;
+        max-height: 20vw;
         overflow-y: auto;
     }
 
@@ -239,6 +239,38 @@
         fill: var(--ready);
     }
 
+    @media only screen and (max-width: 768px) {
+        
+        #cds-ca-profesor-data-wrapper {
+            gap: var(--spacing-1);
+        }
 
+        #cds-ca-profesor-data-wrapper p {
+            margin: .5em 0;
+        }
+
+        #cds-ca-pdw-profesor-profile-pic {
+            --profesor-image-size: 30vw;
+        }
+
+        #cds-ca-pwd-name p {
+            font-size: var(--font-size-small);
+        }
+
+        #cds-cl-head-panel {
+            height: calc(var(--ccp-page-height) * 0.04);
+        }
+        
+        #cds-cl-head-panel h2 {
+            font-size: var(--font-size-h3);
+        } 
+
+        #cds-cl-lectures-container {
+            --lectures-container-height: calc(var(--ccp-page-height) * 0.18);
+
+            max-height: var(--lectures-container-height);
+            height: var(--lectures-container-height);
+        }
+    }
 
 </style>

@@ -119,6 +119,26 @@
     
     /*=====  End of User data editor  ======*/
     
-    
+    @media only screen and (max-width: 768px) {
+
+        #profile-editor-wrapper {
+            padding: 0 var(--spacing-2);
+        }
+
+        #pew-user-data-container {
+            margin: var(--spacing-h3) 0;
+        }
+
+        #pew-udc-profile-picture-wrapper {
+            --profile-picture-size: 17vw;
+
+            width: var(--profile-picture-size);
+            height: var(--profile-picture-size);
+            margin-right: var(--spacing-3);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+    }
 
 </style>

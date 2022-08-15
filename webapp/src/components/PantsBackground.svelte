@@ -27,6 +27,7 @@
         display: grid;
         grid-template-columns: repeat(13, 1fr);
         grid-template-rows: repeat(13, 1fr);
+        min-height: var(--login-page-content-height);
         background: var(--login-page-gradient);
     }
 
@@ -48,6 +49,29 @@
         z-index: 1;
     }
 
-    
+    @media only screen and (max-width: 768px) {
+        #cordelia-pants-form {
+            min-height: calc(var(--login-page-content-height) * 1);
+        }
+
+        #aside-pants-image-container {
+            grid-area: 1 / 1 / 5 / 14 ;
+        }
+
+        #aside-pants-image-container img {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        #cpf-signup-form-wrapper {
+            grid-column-start: 1;
+            grid-column-end: 14;
+            grid-row-start: 5;
+            grid-row-end: 14;
+
+            place-items: start center;
+            padding: var(--spacing-4) 0;
+        }        
+    }
 </style>
 
