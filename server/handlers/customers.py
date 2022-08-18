@@ -46,6 +46,8 @@ def createCustomer():
 def authenticateCustomer():
     request_data: login_form = requests_forms.createRequest(login_form, request.json)
     target_customer = repository.customers.getByEmail(request_data.email)
+    if not target_customer:
+        return jsonify({'message': 'email not registered'}), 404
     
     correct_password = target_customer.auth(request_data.password)
     if not correct_password:
@@ -58,6 +60,8 @@ def authenticateCustomer():
         'name': target_customer.name,
         'last_name': target_customer.last_name
     }
+    
+    # TODO: add expiration to the token
     
     jwt_token = jwt.encode(jwt_payload, jwt_secret, algorithm='HS256')
     return make_response(jsonify({'token': jwt_token}), 200)

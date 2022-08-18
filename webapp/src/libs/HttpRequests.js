@@ -20,8 +20,18 @@ export class LoginRequest {
 
     toJson = attributesToJson.bind(this);
 
-    do = () => {
-        alert(`LoginRequest: ${this.toJson()}`);
+    do = callback => {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        console.log("LoginRequest: " + this.toJson());
+
+        const request = new Request(`${cordelia_server}/customers/customer/auth`, {method: 'POST', headers: headers, body: this.toJson()});
+        
+        fetch(request)
+            .then(response => response.json())
+            .then(data => {
+                return callback(data);
+            });
     }
 }
 
@@ -35,8 +45,14 @@ export class SignUpRequest {
 
     toJson = attributesToJson.bind(this);
 
-    do = () => {
-        alert(`SignUpRequest: ${this.toJson()}`);
+    do = callback => {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        const request = new Request(`${cordelia_server}/customers/customer`, {method: 'POST', headers: headers, body: this.toJson()});
+
+        fetch(request)
+            .then(response => callback(response.status)); // if successful, return status code 201 and no body
     }
 }
 
@@ -48,6 +64,7 @@ export class PasswordRecoveryRequest {
     toJson = attributesToJson.bind(this);
 
     do = () => {
-        alert(`PasswordRecoveryRequest: ${this.toJson()}`);
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
     }
 }

@@ -11,3 +11,4 @@ webapp/*.sh
 Docs/
 server/entitys_data/
 /**/__pycache__/
+*.zip

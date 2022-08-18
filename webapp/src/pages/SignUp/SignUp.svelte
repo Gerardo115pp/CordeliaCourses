@@ -45,7 +45,7 @@
 
     const signup = () => {
         if (is_form_ready) {
-            signup_request.do();
+            signup_request.do(() => push('/login'));
         }
     }
 

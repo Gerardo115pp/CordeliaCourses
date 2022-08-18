@@ -3,12 +3,13 @@
     import { LoginRequest } from '../../libs/HttpRequests';
     import Input from '../../components/Input.svelte';
     import CordeliaPants from '../../components/PantsBackground.svelte';
+    import Cookies from 'js-cookie';
     import { push, link } from 'svelte-spa-router';
 
     const login_request = new LoginRequest();
     let is_form_ready = false;
 
-    const form_data = [
+    let form_data = [
         new FieldData('customer_email', /[^;\'\s\n]/, 'Correo electronico', 'email'),
         new FieldData('customer_password', /[^;\s\n]/, 'Contrasena', 'password')
     ]
@@ -26,7 +27,12 @@
 
     const login = () => {
         if (is_form_ready) {
-            login_request.do();
+            login_request.do(data => {
+                if (data.token !== undefined) {
+                    Cookies.set('cordelia-token', data.token);
+                    window.queueMicrotask(() => push('/courses'));
+                }
+            });
         }
     }
 
@@ -53,7 +59,7 @@
             {/each}
         </div>
         <div id="clp-lf-form-controls">
-            <button on:click={() => push("/courses")} id="clp-lf-login-btn" class="full-btn">Iniciar sesion</button>
+            <button on:click={login} id="clp-lf-login-btn" class="full-btn">Iniciar sesion</button>
             <button on:click={() => push("/signup")} id="clp-lf-google-btn" class="full-btn">Google</button>
             <div id="clp-lf-create-account">
                 <a href="/signup" use:link>Crear cuenta</a>
