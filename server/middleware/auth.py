@@ -1,4 +1,4 @@
-from flask import  request, jsonify
+from flask import  current_app ,request, jsonify
 from datetime import datetime, timedelta
 from functools import wraps
 from typing import Callable
@@ -9,11 +9,11 @@ import os
 
 
 def token_required(f: Callable) -> Callable:
-    jwt_secret = os.getenv('JWT_SECRET')
-    assert jwt_secret is not None, 'JWT_SECRET must be set'
-    
     @wraps(f)
     def decorated(*args, **kwargs):
+        jwt_secret = current_app.config.get('JWT_SECRET')
+        assert jwt_secret is not None, 'JWT_SECRET must be set'
+        
         token = request.headers.get('Authorization', "")
         token = token.removeprefix('Bearer ')
         
