@@ -8,22 +8,39 @@
     const signup_request = new SignUpRequest();
     let is_form_ready = false;
 
-    const form_data = [
-        new FieldData('customer_name', /^[A-z\d\s]*$/, 'Nombre'),
-        new FieldData('customer_email', /[^;\'\s\n]/, 'Correo electronico', 'email'),
-        new FieldData('customer_password', /[^;\s\n]/, 'Contrasena', 'password')
+    let form_data = [
+        new FieldData('customer_name', /^[A-z\s]*$/, 'Nombre'),
+        new FieldData('customer_email', /[^;\'\s\n]*/, 'Correo electronico', 'email'),
+        new FieldData('customer_password', /[^;\s\n]{8,16}/, 'contraseña', 'password')
     ]
 
+    form_data[0].placeholder = "Nombre Apellido";
+    form_data[1].placeholder = "correo con el que hiciste tu compra";
+    form_data[2].placeholder = "nueva contraseña";
+
     // Link FormData to login_request
-        $: signup_request.name = form_data[0].getFieldValue();
+        let first_name = "";
+        let last_name = "";
+        $: signup_request.name = first_name;
+        $: signup_request.last_name = last_name;
         $: signup_request.email = form_data[1].getFieldValue();
         $: signup_request.password = form_data[2].getFieldValue();
     // 
 
-    const verifyLoginForm = () => {
+    const verifySignUpForm = () => {
         let is_valid = verifyFormFields(form_data);
         is_form_ready = is_valid;
+        if (is_valid) {
+            setNameData(form_data[0].getFieldValue());
+        }
         form_data = [...form_data];
+    }
+
+    const setNameData = name => {
+        const first_space = name.indexOf(" ");
+        const names = [name.slice(0, first_space), name.slice(first_space + 1)]
+        first_name = names[0];
+        last_name = names[1];
     }
 
     const signup = () => {
@@ -32,7 +49,6 @@
         }
     }
 
-    const aside_img_url = "/resources/Fotografias/Corde-164-original.webp";
 </script>
 
 <CordeliaPants>
@@ -46,14 +62,15 @@
                         isClear={true}
                         isSquared={true}
                         input_label={field.name}
-                        onEnterPressed={verifyLoginForm}
-                        onBlur={verifyLoginForm}
+                        show_placeholder={field.placeholder !== field.name}
+                        onEnterPressed={verifySignUpForm}
+                        onBlur={verifySignUpForm}
                     />
                 </div>
             {/each}
         </div>
         <div id="clp-sf-form-controls">
-            <button id="clp-sf-login-btn" class="full-btn">Crear cuenta</button>
+            <button id="clp-sf-login-btn" on:click={signup} class="full-btn">Crear cuenta</button>
             <button on:click={() => push("/signup")} id="clp-sf-google-btn" class="full-btn">Registrate con google</button>
             <div id="clp-sf-forgot-password">
                 <p>¿Ya tienes una? <a href="/login" use:link>Inicia sesion</a></p>

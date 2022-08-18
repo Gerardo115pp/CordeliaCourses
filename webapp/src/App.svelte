@@ -19,6 +19,7 @@
         --theme-light-five-color: #e6cdbc;
         --dark-color: black;
         --dark-light-color: #00000080;
+        --placeholder-color: #00000025;
         --clear-color: #F3F4F1;
         --theme-gradient: linear-gradient(270deg, #F3F4F1 0%, #E6E2DF 100%);
         --danger: #E87156;
@@ -71,6 +72,8 @@
         --button-shadow: var(--boxes-shadow);
         --button-font-weight: 500;
 
+
+     
     }
 
 
@@ -139,7 +142,7 @@
             border: none;
             box-shadow: var(--button-shadow);
             transition: all 0.3s ease-in-out;
-            text-transform: var(--buttons-text-transformt);
+            text-transform: var(--buttons-text-transform);
         }
 
         :global(.full-two-btn) {
@@ -154,7 +157,7 @@
             border: none;
             box-shadow: var(--button-shadow);
             transition: all 0.3s ease-in-out;
-            text-transform: var(--buttons-text-transformt);
+            text-transform: var(--buttons-text-transform);
         }
 
         :global(.cordelia-ruiz-brand-label) {

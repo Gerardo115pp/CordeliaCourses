@@ -43,6 +43,8 @@
                         field_data={field}
                         isClear={true}
                         isSquared={true}
+                        input_color="var(--dark-light-color)"
+                        input_dark_color="var(--theme-color)"
                         input_label={field.name}
                         onEnterPressed={verifyLoginForm}
                         onBlur={verifyLoginForm}
@@ -52,7 +54,10 @@
         </div>
         <div id="clp-lf-form-controls">
             <button on:click={() => push("/courses")} id="clp-lf-login-btn" class="full-btn">Iniciar sesion</button>
-            <button on:click={() => push("/signup")} id="clp-lf-google-btn" class="full-btn">Registrate con google</button>
+            <button on:click={() => push("/signup")} id="clp-lf-google-btn" class="full-btn">Google</button>
+            <div id="clp-lf-create-account">
+                <a href="/signup" use:link>Crear cuenta</a>
+            </div>
             <div id="clp-lf-forgot-password">
                 <a href="/password" use:link>Olvidé mi contraseña</a>
             </div>

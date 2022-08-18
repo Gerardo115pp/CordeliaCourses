@@ -20,6 +20,7 @@ export const verifyFormFields = (form_data) => {
         } else if(!fd.isReady()) {
 
             fd.state = FieldStates.HAS_ERRORS;
+            console.log(`${fd.name} is not ready: ${field_value}`);
             fd.error_message = "Invalid field";
             is_valid = false;
         } else {

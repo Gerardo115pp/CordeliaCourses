@@ -66,11 +66,14 @@ const config = {
 
 module.exports = (env, argv) => {
 	const isProd = argv.mode === 'production';
-	console.log(env)
+	const build_context = {
+		"CORDELIA_API": process.env.CORDELIA_API,
+	}
 
 	config.plugins.push(
 		new webpack.DefinePlugin({
 			"JD_ADDRESS_ENV": JSON.stringify(env.JD_ADDRESS),
+			"CORDELIA_API": JSON.stringify(process.env.CORDELIA_API)
 		})
 	);
 

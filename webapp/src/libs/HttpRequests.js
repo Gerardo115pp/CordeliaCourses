@@ -1,4 +1,6 @@
 
+const cordelia_server = CORDELIA_API;
+
 function attributesToJson() {
     const json_data = {};
     console.log("AttributestoJson:" + this);
@@ -26,6 +28,7 @@ export class LoginRequest {
 export class SignUpRequest {
     constructor() {
         this.name = "";
+        this.last_name = "";
         this.email = "";
         this.password = "";
     }

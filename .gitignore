@@ -8,3 +8,6 @@ data/
 /**/build/
 webapp/*.zip
 webapp/*.sh
+Docs/
+server/entitys_data/
+/**/__pycache__/
