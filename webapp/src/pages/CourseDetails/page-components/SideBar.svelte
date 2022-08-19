@@ -1,49 +1,61 @@
 <script>
     import check_icon from "../../../icons/Check.svg";
 
-    export let course_lectures = [
-        {
-            name: "01. Titulo de la leccion",
-            completed: true
-        },
-        {
-            name: "02. Titulo de la leccion",
-            completed: true
-        },
-        {
-            name: "03. Titulo de la leccion",
-            completed: false
-        },
-        {
-            name: "04. Titulo de la leccion",
-            completed: false
-        },
-        {
-            name: "05. Titulo de la leccion",
-            completed: false
-        },
-        {
-            name: "06. Titulo de la leccion",
-            completed: false
-        },
-        {
-            name: "07. Titulo de la leccion",
-            completed: false
-        },
-        {
-            name: "08. Titulo de la leccion",
-            completed: false
-        },
-        {
-            name: "09. Titulo de la leccion",
-            completed: false
-        },
-        {
-            name: "10. Titulo de la leccion",
-            completed: false
+    export let course_data = {
+        classes: [
+            {
+                description: "cargando...",
+                title: "cargando...",
+                id: "",
+                resource_path: "",
+                resource_type: "",
+                unlocks_on: "2020-07-10 15:00:00.000"
+            }
+        ],
+        description: "",
+        id: 0,
+        name: "",
+        teacher_name: ""
+    };
+    export let selected_class = 0;
+
+    const isClassUnlocked = class_data => {
+        const today = new Date();
+        const unlock_date = new Date(class_data.unlocks_on);
+        return today >= unlock_date;
+    }
+
+    const getUnlockedPercentage = classes => {
+        const unlocked_classes = classes.filter(isClassUnlocked);
+        console.log(unlocked_classes.length);
+        let percentage = Math.round((unlocked_classes.length / classes.length) * 100);
+        const percentage_bar = document.querySelector(".completed-bar-progress");
+        if (percentage_bar !== null) {
+            window.setTimeout(() => {
+                percentage_bar.style.setProperty("--completed-bar-progress-width", `${percentage}%`);
+            }, 80);
+        }
+        return percentage;
+    }
+
+    const selectClass = class_index => {
+        const class_data = course_data.classes[class_index];
+        const unlock_date = new Date(class_data.unlocks_on);
+        const human_readable_date = unlock_date.toLocaleDateString("es-MX", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        });
+
+        if (!isClassUnlocked(class_data)) {
+            alert(`Esta clase se desbloqueará el ${human_readable_date}`);
+            return;
         }
 
-    ]
+        selected_class = class_index;
+        
+    }
 </script>
 
 <div id="course-data-sidebar">
@@ -54,11 +66,11 @@
                 <img src="/resources/Fotografias/Corde-169-S.webp" alt="profesor">
             </div>
             <div id="cds-ca-pwd-name">
-                <h3>cordelia ruiz</h3>
+                <h3>{course_data.teacher_name}</h3>
                 <p>Consultora de Imagen y Moda</p>
             </div>
             <p class="cds-ca-pwd-description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                {course_data.description}
             </p>
         </div>
     </div>
@@ -66,8 +78,8 @@
         <div id="cds-cl-head-panel">
             <h2>temario del curso</h2>
             <div id="cds-cl-hp-progress">
-                <span class="completed-percenage">Completado 20%</span>
-                <span class="completed-count">2/10</span>
+                <span class="completed-percenage">Completado {getUnlockedPercentage(course_data.classes)}%</span>
+                <span class="completed-count">{course_data.classes.filter(isClassUnlocked).length}/{course_data.classes.length}</span>
                 <div class="completed-bar">
                     <div class="completed-bar-container">
                         <div class="completed-bar-progress"></div>
@@ -76,9 +88,9 @@
             </div>
         </div>
         <div id="cds-cl-lectures-container">
-            {#each course_lectures as lecture}
-                <div class={`lecture-item ${lecture.completed ? 'lecture-complete' : 'lecture-incomplete'}`}>
-                    <span class="lecture-name">{lecture.name}</span>
+            {#each course_data.classes as lecture, h}
+                <div on:click={() => selectClass(h)} class={`lecture-item ${isClassUnlocked(lecture) ? 'lecture-unlocked' : 'lecture-locked'}`}>
+                    <span class="lecture-name">{lecture.title}</span>
                     <span class="lecture-check icon-wrapper">{@html check_icon}</span>
                 </div>
             {/each}
@@ -209,7 +221,8 @@
     }
 
     .completed-bar-progress {
-        width: 20%;
+        --completed-bar-progress-width: 20%;
+        width: var(--completed-bar-progress-width);
         height: 100%;
         background-color: var(--theme-five-color);
     }
@@ -231,11 +244,11 @@
         color: var(--dark-light-color);
     }
 
-    .lecture-item.lecture-complete {
+    .lecture-item.lecture-locked {
         text-decoration: line-through;
     }
 
-    .lecture-item.lecture-complete .lecture-check {
+    .lecture-item.lecture-unlocked .lecture-check {
         fill: var(--ready);
     }
 

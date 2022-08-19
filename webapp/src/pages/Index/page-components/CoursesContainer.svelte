@@ -1,32 +1,7 @@
 <script>
     import { push } from "svelte-spa-router";
 
-    export let courses = [
-        {
-            id: "000000-000000-000000-000001",
-            title: "Curso de Sistemas de Control",
-            description: "Curso de Sistemas de Control",
-            thumbnail: "/resources/Fotografias/Corde-164-original.webp"
-        },
-        {
-            id: "000000-000000-000000-000002",
-            title: "Curso de Arquitectura de Css",
-            description: "Curso de Arquitectura de Css, diseño de paginas web",
-            thumbnail: "/resources/Fotografias/Corde-182-original.webp"
-        },
-        {
-            id: "000000-000000-000000-000003",
-            title: "Curso de Base de Datos",
-            description: "Curso de Base de Datos",
-            thumbnail: "/resources/Fotografias/Corde-102-original.webp"
-        },
-        {
-            id: "000000-000000-000000-000004",
-            title: "Curso de Programacion",
-            description: "Curso de Programacion",
-            thumbnail: "/resources/Fotografias/Corde-090-original.webp"
-        }
-    ];
+    export let courses = [];
 </script>
 
 <div id="cordelia-customer-courses">
@@ -34,9 +9,9 @@
     {#each courses as course}
          <div class="course-item-wrapper">
             <div class="course-thumbnail">
-                <img src="{course.thumbnail}" alt="{course.title}">
+                <img src="/resources/Fotografias/Corde-102-original.webp" alt="{course.name}">
             </div>
-            <div on:click={() => push(`/course/${course.id}`)} class="course-title"><h2>{course.title}</h2></div>
+            <div on:click={() => push(`/course/${course.id}`)} class="course-title"><h2>{course.name}</h2></div>
             <div class="course-description">{course.description}</div>
          </div>
     {/each}

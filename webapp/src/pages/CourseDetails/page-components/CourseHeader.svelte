@@ -2,8 +2,8 @@
     import cordelia_icon from '../../../icons/Luna.svg';
 
     export let course_data = {
-        title: 'Serie Tendencias O/I 2022',
-        teacher: 'cordelia ruiz'
+        name: 'Serie Tendencias O/I 2022',
+        teacher_name: 'cordelia ruiz'
     }
 
 </script>
@@ -12,8 +12,8 @@
     <div id="cdh-cord-icon">
         {@html cordelia_icon}
     </div>
-    <div id="cdh-title"><h4>{course_data.title}</h4></div>
-    <div id="course-teacher">POR: {course_data.teacher}</div>
+    <div id="cdh-title"><h4>{course_data.name}</h4></div>
+    <div id="course-teacher">POR: {course_data.teacher_name}</div>
 </header>
 
 <style>

@@ -1,13 +1,43 @@
 <script>
-    import radagon_icon from "../../icons/Degradado4.svg";
+    import CourseHeader from "./page-components/CourseHeader.svelte";
     import law_of_regression from "../../icons/Degradado9.svg";
     import SideBar from "./page-components/SideBar.svelte";
-    import CourseHeader from "./page-components/CourseHeader.svelte";
+    import radagon_icon from "../../icons/Degradado4.svg";
+    import { GetCourseRequest } from '../../libs/HttpRequests';
+    import { getToken } from '../../libs/cord_utils';
+    import { onMount } from 'svelte';
+    
+    
+    let course_data = {
+        classes: [
+            {
+                description: "cargando...",
+                title: "cargando...",
+                id: "",
+                resource_path: "",
+                resource_type: "",
+                unlocks_on: "2020-07-10 15:00:00.000"
+            }
+        ],
+        description: "",
+        id: 0,
+        name: "",
+        teacher_name: ""
+    };
+    let selected_class = 0;
 
     window.scrollTo(0, 0);
 
     export let params = {};
     const { course_id } = params;
+
+    onMount(() => {
+        const token = getToken();
+        const request = new GetCourseRequest(token, course_id);
+        request.do(data => {
+            course_data = data;
+        });
+    });
 </script>
 
 <main id="course-details-page">
@@ -19,7 +49,7 @@
     </div>
     <div id="cdp-page-content">
         <div id="cdp-pc-course-header">
-            <CourseHeader/>
+            <CourseHeader course_data={course_data}/>
         </div>
         <div id="cdp-pc-course-panel">
             <div id="cdp-cp-video-wrapper">
@@ -28,7 +58,7 @@
                 </div>
             </div>
             <div id="cdp-cp-sidepanel">
-                <SideBar/>
+                <SideBar {course_data} bind:selected_class={selected_class}/>
             </div>
             <div id="cdp-cp-tabs">
                 <div class="cdp-cp-tab">Descripcion</div>
@@ -37,9 +67,9 @@
             </div>
             <div id="cdp-cp-controls">
                 <div id="cdp-cp-desc-control">
-                    <h3 class="cdp-cp-dc-title">Lorem ipsum dolor sit amet</h3>
+                    <h3 class="cdp-cp-dc-title">{course_data.classes[selected_class].title}</h3>
                     <p class="cdp-cp-dc-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        {course_data.classes[selected_class].description}
                     </p>
                 </div>
             </div>

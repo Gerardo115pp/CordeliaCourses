@@ -22,7 +22,7 @@ class CoursesRepository:
             cursor.execute("SELECT * FROM courses")
             rows = cursor.fetchall()
         
-        courses = [Course.create(**row) for row in rows]
+        courses = [Course.recreate(**row) for row in rows]
         return courses
 
     def getById(self, id: str) -> Course:
@@ -31,7 +31,7 @@ class CoursesRepository:
             cursor.execute(f"SELECT * FROM courses WHERE id = '{id}'")
             row = cursor.fetchone()
             
-        return Course.create(**row) if row else None
+        return Course.recreate(**row) if row else None
 
     def getSpecialAccessMap(self) -> Dict[int, str]:
         special_access_map: Dict[int, str] = {}

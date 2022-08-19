@@ -68,3 +68,54 @@ export class PasswordRecoveryRequest {
         headers.append('Content-Type', 'application/json');
     }
 }
+export class GetCustomerCoursesRequest {
+    constructor() {
+        this.token = ""
+    }
+
+    toJson = attributesToJson.bind(this);
+
+    do = callback => {
+        if (this.token === "") {
+            return;
+        }
+
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', `Bearer ${this.token}`);
+
+        const request = new Request(`${cordelia_server}/courses/`, {method: 'GET', headers: headers});
+        fetch(request)
+            .then(response => response.json())
+            .then(data => {
+                return callback(data);
+            });
+    }
+}
+
+export class GetCourseRequest {
+
+    constructor(token, id) {
+        this.token = token;
+        this.id = id;
+    }
+
+    toJson = attributesToJson.bind(this);
+
+    do = callback => {
+        if (this.token === undefined || this.id === undefined) {
+            return;
+        }
+
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', `Bearer ${this.token}`);
+
+        const request = new Request(`${cordelia_server}/courses/course?id=${this.id}`, {method: 'GET', headers: headers});
+        fetch(request)
+            .then(response => response.json())
+            .then(data => {
+                return callback(data);
+            });
+    }
+}

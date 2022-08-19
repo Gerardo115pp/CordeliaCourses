@@ -1,30 +1,19 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
+from typing import List, Dict
 from datetime import datetime
 from os.path import exists
-from typing import List
+import json
 
+
+CLASSES_FILE_NAME = "classes.json"
+OPINIONS_FILE_NAME = "opinions.json"
+SPECIAL_ACCESS_FILE_NAME = "special_access.json"
 
 def allArgsPresent(obj: object, args: List[str]) -> bool:
     """ 
         this method should be reassigned from the __init__.py file
     """
     raise NotImplementedError("this shouldnt happen")
-
-
-""" 
-DB structure:
-
-+--------------+------------------+------+-----+---------+----------------+
-| Field        | Type             | Null | Key | Default | Extra          |
-+--------------+------------------+------+-----+---------+----------------+
-| id           | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
-| name         | varchar(100)     | NO   |     | NULL    |                |
-| description  | varchar(255)     | NO   |     | NULL    |                |
-| teacher_name | varchar(120)     | NO   |     | NULL    |                |
-| course_data  | varchar(255)     | NO   |     | NULL    |                |
-+--------------+------------------+------+-----+---------+----------------+
-"""
-
 
 @dataclass
 class Course:
@@ -54,5 +43,10 @@ class Course:
         recreated_course = Course(**kwargs)
         return recreated_course
         
+    @property
+    def Classes(self) -> List[Dict]:
+        with open(f"{self.course_data}/{CLASSES_FILE_NAME}", "r") as f:
+            return json.load(f)
 
-    
+    def toJson(self) -> Dict:
+        return asdict(self)

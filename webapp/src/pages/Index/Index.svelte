@@ -3,6 +3,21 @@
     import radagon_icon from "../../icons/Degradado4.svg";
     import law_of_regression from "../../icons/Degradado9.svg";
     import CustomerBoughtCourses from './page-components/CoursesContainer.svelte';
+    import { getToken } from '../../libs/cord_utils';
+    import { GetCustomerCoursesRequest } from '../../libs/HttpRequests';
+    import { onMount } from 'svelte';
+
+    let courses = [];
+
+    onMount(() => {
+        const token = getToken();
+        if (token) {
+            const request = new GetCustomerCoursesRequest();
+            request.token = token;
+            request.do(data => courses = data);
+        }
+    })
+
     
     window.scrollTo(0, 0);
     
@@ -19,7 +34,7 @@
     <div id="ccp-page-content">
         <ProfileEditor/>
         <div class="ccp-spacer">
-            <CustomerBoughtCourses/>
+            <CustomerBoughtCourses {courses}/>
         </div>
     </div>
 </main>
