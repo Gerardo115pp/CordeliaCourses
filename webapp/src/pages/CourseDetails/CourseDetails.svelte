@@ -93,7 +93,7 @@
         width: 100%;
         max-width: 100%;
         flex-direction: column;
-        /* min-height: var(--ccp-page-height); */
+        min-height: var(--ccp-page-height);
         background-color: var(--theme-three-color);
         align-items: center;
         padding: calc(var(--spacing-h1) * .5) calc(var(--spacing-h1) * 2.5);
@@ -120,7 +120,7 @@
 
         #law-of-regression {        
             width: 40rem;
-            top: 40%;
+            top: 37%;
             left: 70%;
             filter: blur(30px);
         }

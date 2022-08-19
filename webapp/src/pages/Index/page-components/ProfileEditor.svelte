@@ -3,31 +3,22 @@
     import Input from '../../../components/Input.svelte';
     import FieldData, { verifyFormFields } from '../../../libs/FieldData';
     import { link } from 'svelte-spa-router';
+    import jwt_decode from 'jwt-decode';
+    import { onMount } from 'svelte';
+    import { getToken } from '../../../libs/cord_utils';
 
     export let user_data = {
-        username: 'ILSEESPINO',
-        name: 'ilse espino',
-        address: 'Monterrey, N.L.',
-        email: 'ilse_espino@gmail.com',
-        phone: '34564234',
-        postal_code: '45079',
+        id: "customer-uuid-example",
+        email: "no email",
+        name: "no",
+        last_name: "name"
     };
 
-    let is_form_ready = false;
-    const form_data = [
-        new FieldData('username', /[^;\'\s\n]/, 'User', 'text'),
-        new FieldData('name', /[^;\'\s\n]/, 'Nombre', 'text'),
-        new FieldData('email', /[^;\'\s\n]/, 'Correo electronico', 'email'),
-        new FieldData('phone', /[^;\'\s\n]/, 'Telefono', 'text'),
-        new FieldData('address', /[^;\'\s\n]/, 'Direccion', 'text'),
-        new FieldData('postal_code', /[^;\'\s\n]/, 'Codigo postal', 'text')
-    ];
-
-    const verifyProfileForm = () => {
-        let is_valid = verifyFormFields(form_data);
-        is_form_ready = is_valid;
-        form_data = [...form_data];
-    }
+    onMount(() => {
+        const token = getToken();
+        const decoded = jwt_decode(token);
+        user_data = decoded;
+    });
 
 
 </script>
@@ -35,9 +26,9 @@
 
 <div id="profile-editor-wrapper">
     <div id="pew-top-information">
-        <h2 class="page-title">¡Hola, <span>{user_data.name.split(" ")[0]}</span>!</h2>
+        <h2 class="page-title">¡Hola, <span>{user_data.name}</span>!</h2>
         <p id="pew-page-information">
-            <span>Iniciaste sesión como {user_data.username} (¿No eres {user_data.username}? <a href="/login" use:link>Cerrar sesión</a>)</span>
+            <span>Iniciaste sesión como <span>{user_data.name+user_data.last_name}</span> (¿No eres <span>{user_data.name+user_data.last_name}</span>? <a href="/login" use:link>Cerrar sesión</a>)</span>
             <br/>
             <span>Aquí puedes ver tus pedidos recientes, editar tu contraseña y detalles de tu cuenta.</span>
         </p>
@@ -46,7 +37,7 @@
         <div id="pew-udc-profile-picture-wrapper">
         </div>
         <div id="pew-udc-user-data">
-            <h3 id="pew-udc-ud-name">{user_data.name}</h3>
+            <h3 id="pew-udc-ud-name">{`${user_data.name} ${user_data.last_name}`}</h3>
             <p id="pew-udc-ud-address">{user_data.email}</p>
         </div>
     </div>
@@ -72,6 +63,10 @@
             color: var(--dark-light-color);
         }
         
+        #pew-page-information>span>span {
+            text-transform: uppercase;
+        }
+
         #pew-page-information a {
             color: inherit;
         }

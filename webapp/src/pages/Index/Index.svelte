@@ -48,7 +48,7 @@
         position: relative;
         box-sizing: border-box;
         min-height: var(--ccp-page-height);
-        overflow-x: hidden;
+        overflow: hidden;
         max-width: 100%;
         background-color: var(--theme-three-color);
         padding: calc(calc(var(--spacing-h1) * .5) + var(--spacing-h1)) 0 0 calc(var(--spacing-h1) * 2.3);
