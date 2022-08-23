@@ -3,8 +3,8 @@
     import { LoginRequest } from '../../libs/HttpRequests';
     import Input from '../../components/Input.svelte';
     import CordeliaPants from '../../components/PantsBackground.svelte';
-    import Cookies from 'js-cookie';
     import { push, link } from 'svelte-spa-router';
+    import cordelia_storage from '../../libs/local_storage';
 
     const login_request = new LoginRequest();
     let is_form_ready = false;
@@ -29,7 +29,7 @@
         if (is_form_ready) {
             login_request.do(data => {
                 if (data.token !== undefined) {
-                    Cookies.set('cordelia-token', data.token);
+                    cordelia_storage.Token = data.token;
                     window.queueMicrotask(() => push('/courses'));
                 }
             });

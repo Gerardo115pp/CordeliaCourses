@@ -4,7 +4,7 @@
     import SideBar from "./page-components/SideBar.svelte";
     import radagon_icon from "../../icons/Degradado4.svg";
     import { GetCourseRequest } from '../../libs/HttpRequests';
-    import { getToken } from '../../libs/cord_utils';
+    import cordelia_storage from "../../libs/local_storage";
     import { onMount } from 'svelte';
     
     
@@ -39,10 +39,18 @@
     const { course_id } = params;
 
     onMount(() => {
-        const token = getToken();
+        const local_course_data = cordelia_storage.getCoursesDateils(course_id);
+        
+        if (local_course_data !== undefined) {
+            course_data = local_course_data;
+            return;
+        }
+
+        const token = cordelia_storage.Token;
         const request = new GetCourseRequest(token, course_id);
         request.do(data => {
             course_data = data;
+            cordelia_storage.setCourseDetails(course_id, data);
         });
     });
 

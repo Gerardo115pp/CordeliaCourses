@@ -3,19 +3,25 @@
     import radagon_icon from "../../icons/Degradado4.svg";
     import law_of_regression from "../../icons/Degradado9.svg";
     import CustomerBoughtCourses from './page-components/CoursesContainer.svelte';
-    import { getToken } from '../../libs/cord_utils';
     import { GetCustomerCoursesRequest } from '../../libs/HttpRequests';
     import { onMount } from 'svelte';
+    import cordelia_storage from "../../libs/local_storage";
 
-    let courses = [];
-
+    let courses = cordelia_storage.Courses;
+    
     onMount(() => {
-        const token = getToken();
-        if (token) {
-            const request = new GetCustomerCoursesRequest();
-            request.token = token;
-            request.do(data => courses = data);
+        if (courses.length === 0) {
+            const token = cordelia_storage.Token;
+            if (token) {
+                const request = new GetCustomerCoursesRequest();
+                request.token = token;
+                request.do(data => {
+                    courses = data;
+                    cordelia_storage.Courses = data;
+                });
+            }
         }
+
     })
 
     
@@ -23,7 +29,6 @@
     
 </script>
 
-<!-- Flor -->
 <main id="cordelia-courses-page">
     <div id="radagon-icon" class="erdtree">
         {@html radagon_icon}

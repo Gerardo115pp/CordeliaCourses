@@ -119,3 +119,19 @@ export class GetCourseRequest {
             });
     }
 }
+
+export class GetDataVersion {
+    toJson = attributesToJson.bind(this);
+
+    do = callback => {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        const request = new Request(`${cordelia_server}/data-version`, {method: 'GET', headers: headers});
+        fetch(request)
+            .then(response => response.json())
+            .then(data => {
+                return callback(data);
+            });
+    }
+}

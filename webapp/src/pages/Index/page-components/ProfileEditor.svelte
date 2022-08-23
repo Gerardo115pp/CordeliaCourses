@@ -6,6 +6,7 @@
     import jwt_decode from 'jwt-decode';
     import { onMount } from 'svelte';
     import { getToken } from '../../../libs/cord_utils';
+    import cordelia_storage from '../../../libs/local_storage';
 
     export let user_data = {
         id: "customer-uuid-example",
@@ -15,7 +16,7 @@
     };
 
     onMount(() => {
-        const token = getToken();
+        const token = cordelia_storage.Token;
         const decoded = jwt_decode(token);
         user_data = decoded;
     });

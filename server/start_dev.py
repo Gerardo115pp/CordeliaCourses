@@ -12,7 +12,8 @@ import os
 server_config = {
     "JWT_SECRET": os.getenv("JWT_SECRET"),
     "COURSES_SPECIAL_ACCESSES": [],
-    "COURSES_DIRECTORY": os.getenv("COURSES_DIRECTORY")
+    "COURSES_DIRECTORY": os.getenv("COURSES_DIRECTORY"),
+    "DATA_VERSION": int(os.getenv("DATA_VERSION", 1))
 }
 
 assert server_config["JWT_SECRET"] is not None, "JWT_SECRET is not set"
@@ -31,7 +32,15 @@ def createApp():
     @app.route("/health", methods=["GET"])
     def health():
         return make_response(jsonify({"status": "ok"}), 200)
-    
+
+    @app.route("/data-version", methods=["GET"])
+    def getDataVersion():
+        response = make_response(jsonify({"data_version": app.config["DATA_VERSION"]}), 200)
+        response.headers.add_header("Content-Type", "application/json")
+        response.headers.add_header("X-Data-Version", app.config["DATA_VERSION"])
+        
+        return response
+        
     # customers repository
     customers_repo: CustomersRepo.CustomersRepo = mysql_database.createCustomersRepo()
     CustomersRepo.setRepository(customers_repo) 
