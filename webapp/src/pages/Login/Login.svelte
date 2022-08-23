@@ -102,10 +102,19 @@
         gap: var(--spacing-3) var(--spacing-3);
     }
 
+    #clp-lf-create-account {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+    
     #clp-lf-forgot-password {
+        grid-area: 2 / 2 / 3 / 3;
         text-align: right;
         font-weight: lighter;
         padding: 0 var(--spacing-2) 0 0;
+    }
+
+    #clp-lf-google-btn {
+        display: none;
     }
     
     @media only screen and (max-width: 768px) {

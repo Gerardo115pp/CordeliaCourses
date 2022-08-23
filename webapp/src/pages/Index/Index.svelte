@@ -11,7 +11,6 @@
     let courses = cordelia_storage.Courses;
     
     onMount(() => {
-        console.log(`token: ${cordelia_storage.Token}`)
         if (cordelia_storage.Token === "") {
             push('/login');
             return;

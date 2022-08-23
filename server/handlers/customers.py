@@ -7,6 +7,7 @@ from Http.customers import LoginPasswordCustomerRequest as login_form, CreatePas
 import repository
 import json
 import jwt
+from datetime import datetime, timedelta
 import os
 
 customers_handler = Blueprint('customers_handler', __name__)
@@ -53,12 +54,15 @@ def authenticateCustomer():
     if not correct_password:
         return make_response(jsonify({'message': 'invalid password'}), 401)
     
+    # tokens expire in 30 days
     jwt_secret = current_app.config['JWT_SECRET']
+    expiration_time = timedelta(days=30)
     jwt_payload = {
         'id': target_customer.id,
         'email': target_customer.email,
         'name': target_customer.name,
-        'last_name': target_customer.last_name
+        'last_name': target_customer.last_name,
+        'exp': datetime.utcnow() + expiration_time
     }
     
     # TODO: add expiration to the token
