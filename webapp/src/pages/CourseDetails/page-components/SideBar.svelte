@@ -1,5 +1,8 @@
 <script>
     import check_icon from "../../../icons/Check.svg";
+    import { createEventDispatcher } from "svelte";
+
+    const dispatch = createEventDispatcher();
 
     export let course_data = {
         classes: [
@@ -57,7 +60,10 @@ const getClassTitlePrefix = class_num => {
         });
 
         if (!isClassUnlocked(class_data)) {
-            alert(`Esta clase se desbloqueará el ${human_readable_date}`);
+            dispatch("notification_triggered", {
+                message: `Esta clase se desbloqueará el ${human_readable_date}`,
+                type: "error"
+            });
             return;
         }
 
@@ -249,6 +255,7 @@ const getClassTitlePrefix = class_num => {
 
     .lecture-item {
         display: flex;
+        user-select: none;
         font-size: var(--font-size-2);
         margin: var(--spacing-3) 0;
         justify-content: space-between;

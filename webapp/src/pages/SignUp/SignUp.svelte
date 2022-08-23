@@ -72,7 +72,7 @@
         <div id="clp-sf-form-controls">
             <button id="clp-sf-login-btn" on:click={signup} class="full-btn">Crear cuenta</button>
             <button on:click={() => push("/signup")} id="clp-sf-google-btn" class="full-btn">Registrate con google</button>
-            <div id="clp-sf-forgot-password">
+            <div id="clp-sf-use-login">
                 <p>¿Ya tienes una? <a href="/login" use:link>Inicia sesion</a></p>
             </div>
         </div>
@@ -101,11 +101,16 @@
         gap: var(--spacing-3) var(--spacing-3);
     }
 
-    #clp-sf-forgot-password {
+    #clp-sf-google-btn {
+        display: none;
+    }
+
+    #clp-sf-use-login {
+        grid-area: 2 / 1 / 3 / 2;
         font-weight: lighter;
     }
 
-    #clp-sf-forgot-password a {
+    #clp-sf-use-login a {
         text-transform: capitalize;
     }
 
