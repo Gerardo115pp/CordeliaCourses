@@ -38,6 +38,14 @@
         return percentage;
     }
 
+const getClassTitlePrefix = class_num => {
+    let prefix = class_num.toString();
+    if (class_num < 10) {
+        prefix = `0${prefix}`;
+    }
+    return prefix+". ";
+}
+
     const selectClass = class_index => {
         const class_data = course_data.classes[class_index];
         const unlock_date = new Date(class_data.unlocks_on);
@@ -63,7 +71,7 @@
         <h2>sobre este curso</h2>
         <div id="cds-ca-profesor-data-wrapper">
             <div id="cds-ca-pdw-profesor-profile-pic">
-                <img src="/resources/Fotografias/Corde-169-S.webp" alt="profesor">
+                <img src="/resources/Fotografias/profile_cord-L.webp" alt="profesor">
             </div>
             <div id="cds-ca-pwd-name">
                 <h3>{course_data.teacher_name}</h3>
@@ -89,8 +97,8 @@
         </div>
         <div id="cds-cl-lectures-container">
             {#each course_data.classes as lecture, h}
-                <div on:click={() => selectClass(h)} class={`lecture-item ${isClassUnlocked(lecture) ? 'lecture-unlocked' : 'lecture-locked'}`}>
-                    <span class="lecture-name">{lecture.title}</span>
+                <div on:click={() => selectClass(h)} class={`lecture-item ${isClassUnlocked(lecture) ? 'lecture-unlocked' : 'lecture-locked'} ${selected_class === h ? 'selected-lecture' : ''}`}>
+                    <span class="lecture-name">{getClassTitlePrefix(h+1)}{lecture.title}</span>
                     <span class="lecture-check icon-wrapper">{@html check_icon}</span>
                 </div>
             {/each}
@@ -158,13 +166,13 @@
 
     #cds-ca-pwd-name p {
         color: var(--dark-light-color);
+        margin: .6ex 0;
     }
 
     .cds-ca-pwd-description {
         width: 90%;
         color: var(--dark-light-color);
         font-size: calc(var(--font-size-1) * 1.25);
-        text-align: justify;
         grid-area: 2 / 1 / 3 / 4;
     }
 
@@ -235,6 +243,10 @@
         overflow-y: auto;
     }
 
+    #cds-cl-lectures-container::-webkit-scrollbar {
+        width: 0;
+    }
+
     .lecture-item {
         display: flex;
         font-size: var(--font-size-2);
@@ -242,6 +254,7 @@
         justify-content: space-between;
         cursor: pointer;
         color: var(--dark-light-color);
+        transition: all .2s ease-in-out;
     }
 
     .lecture-item.lecture-locked {
@@ -250,6 +263,10 @@
 
     .lecture-item.lecture-unlocked .lecture-check {
         fill: var(--ready);
+    }
+
+    .lecture-item.selected-lecture {
+        color: var(--theme-five-color);
     }
 
     @media only screen and (max-width: 768px) {

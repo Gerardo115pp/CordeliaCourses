@@ -12,3 +12,5 @@ Docs/
 server/entitys_data/
 /**/__pycache__/
 *.zip
+package/
+server/docker-compose.yaml

@@ -25,6 +25,13 @@
         teacher_name: ""
     };
     let selected_class = 0;
+    
+    const coureses_panel_tabs = {
+        DESCRIPTION: "description",
+        OPINIONS: "opinions",
+        RESOURCES: "resources"
+    };
+    let selected_tab = coureses_panel_tabs.DESCRIPTION;
 
     window.scrollTo(0, 0);
 
@@ -38,6 +45,9 @@
             course_data = data;
         });
     });
+
+    const setTab = tab_name => selected_tab = tab_name;
+
 </script>
 
 <main id="course-details-page">
@@ -54,16 +64,16 @@
         <div id="cdp-pc-course-panel">
             <div id="cdp-cp-video-wrapper">
                 <div id="cdp-cp-vw-media">
-                    <img src="/resources/Fotografias/Corde-102-original.webp" alt="">
+                    <img src="/resources/Fotografias/tendencias_course-L.webp" alt="">
                 </div>
             </div>
             <div id="cdp-cp-sidepanel">
                 <SideBar {course_data} bind:selected_class={selected_class}/>
             </div>
             <div id="cdp-cp-tabs">
-                <div class="cdp-cp-tab">Descripcion</div>
-                <div class="cdp-cp-tab">Opiniones</div>
-                <div class="cdp-cp-tab">Recursos</div>
+                <div on:click={() => setTab(coureses_panel_tabs.DESCRIPTION)} class="cdp-cp-tab {selected_tab === coureses_panel_tabs.DESCRIPTION ? 'cdp-cp-tab-selected' : ''}">Descripcion</div>
+                <div on:click={() => setTab(coureses_panel_tabs.OPINIONS)} class="cdp-cp-tab {selected_tab === coureses_panel_tabs.OPINIONS ? 'cdp-cp-tab-selected' : ''}">Opiniones</div>
+                <div on:click={() => setTab(coureses_panel_tabs.RESOURCES)} class="cdp-cp-tab {selected_tab === coureses_panel_tabs.RESOURCES ? 'cdp-cp-tab-selected' : ''}">Ver Archivos</div>
             </div>
             <div id="cdp-cp-controls">
                 <div id="cdp-cp-desc-control">
@@ -202,6 +212,11 @@
         color: var(--dark-light-color);
         margin-right: var(--spacing-h2);
         transition: all .1s ease-in-out;
+    }
+
+    .cdp-cp-tab.cdp-cp-tab-selected {
+        font-weight: 500;
+        color: var(--theme-two-color);
     }
 
     @media (pointer: fine) {

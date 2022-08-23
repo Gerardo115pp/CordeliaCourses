@@ -35,7 +35,7 @@
         <div id="cn-search-container">
             {#if !isMobile()}
                 <div class="icon-wrapper">
-                    {@html search_icon}
+                    
                 </div>
             {:else}
                 <div class="icon-wrapper">
@@ -90,8 +90,8 @@
     }
 
     #cn-cordelia-ruiz-title h2 {
-        font-size: var(--font-size-h3);
-        color: var(--color-primary);
+        font-size: var(--font-size-4);
+        color: var(--dark-color);
         letter-spacing: 0.3489vw;
         text-align: center;
         margin: 0;

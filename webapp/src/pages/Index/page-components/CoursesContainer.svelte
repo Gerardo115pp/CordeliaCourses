@@ -9,7 +9,7 @@
     {#each courses as course}
          <div class="course-item-wrapper">
             <div class="course-thumbnail">
-                <img src="/resources/Fotografias/Corde-102-original.webp" alt="{course.name}">
+                <img src="/resources/Fotografias/tendencias_course-S.webp" alt="{course.name}">
             </div>
             <div on:click={() => push(`/course/${course.id}`)} class="course-title"><h2>{course.name}</h2></div>
             <div class="course-description">{course.description}</div>
@@ -21,12 +21,16 @@
     #cordelia-customer-courses {
         --ccc-grid-gap: var(--spacing-h3);
         
-        box-sizing: border-box;
+        box-sizing: content-box;
         display: grid;
         background: var(--theme-dark-four-color);
         grid-template-columns: 1fr;
         row-gap: var(--ccc-grid-gap);
-        padding: var(--ccc-grid-gap) var(--spacing-2);
+        padding: var(--ccc-grid-gap);
+    }
+
+    #cordelia-customer-courses h3.page-title {
+        font-weight: 500;
     }
 
     /* #cordelia-customer-courses * {
