@@ -93,6 +93,11 @@ class CordeliaStorage {
         this.saveData();
     }
 
+    removeToken = () => {
+        this.token = "";
+        this.saveData();
+    }
+
     saveData = () => {
         localStorage.setItem("courses", JSON.stringify(this.state.courses));
         localStorage.setItem("courses_details", JSON.stringify(this.state.courses_details));

@@ -1,12 +1,8 @@
 <script>
-    import empty_profile_picture from '../../../icons/Degradado9.svg';
-    import Input from '../../../components/Input.svelte';
-    import FieldData, { verifyFormFields } from '../../../libs/FieldData';
-    import { link } from 'svelte-spa-router';
+    import cordelia_storage from '../../../libs/local_storage';
+    import { link, push } from 'svelte-spa-router';
     import jwt_decode from 'jwt-decode';
     import { onMount } from 'svelte';
-    import { getToken } from '../../../libs/cord_utils';
-    import cordelia_storage from '../../../libs/local_storage';
 
     export let user_data = {
         id: "customer-uuid-example",
@@ -16,11 +12,18 @@
     };
 
     onMount(() => {
-        const token = cordelia_storage.Token;
-        const decoded = jwt_decode(token);
-        user_data = decoded;
+        if (cordelia_storage.Token !== "") {
+            const token = cordelia_storage.Token;
+            const decoded = jwt_decode(token);
+            user_data = decoded;
+        }
     });
 
+
+    const signOut = () => {
+        cordelia_storage.removeToken();
+        push('/login');
+    }
 
 </script>
     
@@ -29,7 +32,7 @@
     <div id="pew-top-information">
         <h2 class="page-title">¡Hola, <span>{user_data.name}</span>!</h2>
         <p id="pew-page-information">
-            <span>Iniciaste sesión como <span>{user_data.name+user_data.last_name}</span> (¿No eres <span>{user_data.name+user_data.last_name}</span>? <a href="/login" use:link>Cerrar sesión</a>)</span>
+            <span>Iniciaste sesión como <span>{user_data.name+user_data.last_name}</span> (¿No eres <span>{user_data.name+user_data.last_name}</span>? <span id="sign-out-btn" on:click={signOut}>Cerrar sesión</span>)</span>
             <br/>
             <span>Aquí puedes ver tus pedidos recientes, editar tu contraseña y detalles de tu cuenta.</span>
         </p>
@@ -68,10 +71,6 @@
             text-transform: uppercase;
         }
 
-        #pew-page-information a {
-            color: inherit;
-        }
-    
     /*=====  End of Top information  ======*/
     
     
@@ -103,6 +102,11 @@
         #pew-udc-user-data p {
             font-size: var(--font-size-2);
             color: var(--dark-light-color);
+        }
+
+        #sign-out-btn {
+            cursor: pointer;
+            font-weight: 600;
         }
         
     /*=====  End of User data  ======*/

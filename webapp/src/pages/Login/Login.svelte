@@ -1,10 +1,18 @@
 <script>
     import FieldData, { verifyFormFields } from '../../libs/FieldData';
+    import CordeliaPants from '../../components/PantsBackground.svelte';
+    import cordelia_storage from '../../libs/local_storage';
     import { LoginRequest } from '../../libs/HttpRequests';
     import Input from '../../components/Input.svelte';
-    import CordeliaPants from '../../components/PantsBackground.svelte';
     import { push, link } from 'svelte-spa-router';
-    import cordelia_storage from '../../libs/local_storage';
+    import { onMount } from 'svelte';
+
+
+    onMount(() => {
+        if (cordelia_storage.Token !== "") {
+            push('/courses');
+        }
+    });
 
     const login_request = new LoginRequest();
     let is_form_ready = false;

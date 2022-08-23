@@ -5,11 +5,18 @@
     import CustomerBoughtCourses from './page-components/CoursesContainer.svelte';
     import { GetCustomerCoursesRequest } from '../../libs/HttpRequests';
     import { onMount } from 'svelte';
+    import { push } from 'svelte-spa-router';
     import cordelia_storage from "../../libs/local_storage";
 
     let courses = cordelia_storage.Courses;
     
     onMount(() => {
+        console.log(`token: ${cordelia_storage.Token}`)
+        if (cordelia_storage.Token === "") {
+            push('/login');
+            return;
+        }
+
         if (courses.length === 0) {
             const token = cordelia_storage.Token;
             if (token) {
