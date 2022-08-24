@@ -34,7 +34,7 @@
         <p id="pew-page-information">
             <span>Iniciaste sesión como <span>{user_data.name+user_data.last_name}</span> (¿No eres <span>{user_data.name+user_data.last_name}</span>? <span id="sign-out-btn" on:click={signOut}>Cerrar sesión</span>)</span>
             <br/>
-            <span>Aquí puedes ver tus pedidos recientes, editar tu contraseña y detalles de tu cuenta.</span>
+            <span>Aquí puedes ver tus pedidos recientes, y detalles de tu cuenta.</span>
         </p>
     </div>
     <div id="pew-user-data-container">

@@ -23,6 +23,9 @@ class CordeliaStorage {
     }
 
     set Token(token) {
+        if (token !== this.token) {
+            this.reset(0);
+        }
         this.token = token;
         this.saveData();
     }
@@ -65,22 +68,42 @@ class CordeliaStorage {
     loadData = () => {
         const courses = localStorage.getItem("courses");
         if (courses) {
-            this.state.courses = JSON.parse(courses);
+            try {
+                this.state.courses = JSON.parse(courses);
+            } catch (error) {
+                console.log(error);
+                this.state.courses = [];
+            }
         }
 
         const courses_details = localStorage.getItem("courses_details");
         if (courses_details) {
-            this.state.courses_details = JSON.parse(courses_details);
+            try {
+                this.state.courses_details = JSON.parse(courses_details);
+            } catch (error) {
+                console.log(error);
+                this.state.courses_details = {};
+            }
         }
 
         const data_version = localStorage.getItem("data_version");
         if (data_version) {
-            this.data_version = JSON.parse(data_version);
+            try {
+                this.data_version = JSON.parse(data_version);
+            } catch (error) {
+                console.log(error);
+                this.state.data_version = 1;
+            }
         }
 
         const token = localStorage.getItem("token");
         if (token) {
-            this.token = JSON.parse(token);
+            try {
+                this.token = JSON.parse(token);
+            } catch (error) {
+                console.log(error);
+                this.token = "";
+            }
         }
     }
 
