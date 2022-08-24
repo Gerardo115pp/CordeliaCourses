@@ -1,5 +1,6 @@
 <script>
     import { isMobile } from '../libs/cord_utils';
+    import { link } from 'svelte-spa-router';
     import search_icon from '../icons/Lupa.svg';
     import menu_icon from '../icons/Menú.svg';
     import user_icon from '../icons/Usuario.svg';
@@ -56,7 +57,9 @@
         </div>
         <div id="cn-aside-navoptions">
             <div class="cn-a-navoption icon-wrapper">{@html store_icon}</div>
-            <div class="cn-a-navoption icon-wrapper">{@html user_icon}</div>
+            <a href="/courses" use:link>
+                <div class="cn-a-navoption icon-wrapper">{@html user_icon}</div>
+            </a>
         </div>
     </nav>
 </header>

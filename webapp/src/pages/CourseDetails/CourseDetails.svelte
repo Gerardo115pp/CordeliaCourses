@@ -8,7 +8,7 @@
     import { onMount } from 'svelte';
     import NotificationsBubble from "../../components/Notifications/NotificationsBubble.svelte";
     
-    let notification_text = "ESTA CLASE SE DESBLOQUEARÁ EL JUEVES, 10 DE JULIO DE 2025";
+    let notification_text = "";
     let course_data = {
         classes: [
             {

@@ -90,7 +90,12 @@
     @media only screen and (max-width: 768px) {
         #cordelia-customer-courses {
             --ccc-grid-gap: var(--spacing-4);
+            padding: var(--ccc-grid-gap) 0;
             width: 100%;
+        }
+
+        #cordelia-customer-courses h3.page-title {
+            padding: 0 var(--ccc-grid-gap);
         }
 
         .course-item-wrapper {
