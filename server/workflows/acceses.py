@@ -1,9 +1,12 @@
-from typing import List, Dict, Set
-import repository
 from Http.woocommerce import getEmailOrdersIds
-import models
+from typing import List, Dict, Set
+from datetime import datetime, timedelta
+from uuid import uuid4
+import repository
 import requests
+import models
 import json
+import jwt
 import os
 
 
@@ -40,10 +43,6 @@ def getCustomerAccess(email: str, special_acceses: Dict[int, Set[str]]) -> None:
     
     return customer_accesses
     
-    
-    
-    
-
 def getAccessFromFile(special_access_map: Dict[int, str]) -> Dict[str, Set[str]]:
     """ 
         get a dict mapping course id to its course_data which is the directory where its data
@@ -68,4 +67,18 @@ def getAccessFromFile(special_access_map: Dict[int, str]) -> Dict[str, Set[str]]
         courses_special_access[course_id] = set(acceses)
     
     return courses_special_access
-            
+
+def generatePasswordRecoveryToken(customer_id: str, email: str, secret: str, expiration_h: int=24) -> str:
+    """ 
+        Generates a jwt token for password recovery. with the customer_id and email as payload. 
+    """
+    
+    payload = {
+        "email": email,
+        "customer": customer_id,
+        "exp": datetime.utcnow() + timedelta(hours=expiration_h)
+    }
+    
+    jwt_token = jwt.encode(payload, secret, algorithm="HS256")
+    return jwt_token
+    

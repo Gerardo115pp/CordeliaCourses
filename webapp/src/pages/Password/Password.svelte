@@ -3,12 +3,13 @@
     import { PasswordRecoveryRequest } from '../../libs/HttpRequests';
     import Input from '../../components/Input.svelte';
     import CordeliaPants from '../../components/PantsBackground.svelte';
+    import { newNotification } from '../../components/Notifications/events';
     import { push } from 'svelte-spa-router';
 
     const password_recovery_request = new PasswordRecoveryRequest();
     let is_form_ready = false;
 
-    const form_data = [
+    let form_data = [
         new FieldData('customer_email', /[^;\'\s\n]/, 'Correo electronico', 'email')
     ]
 
@@ -16,19 +17,30 @@
         $: password_recovery_request.email = form_data[0].getFieldValue();
     // 
 
-    const verifyLoginForm = () => {
+    const verifyPasswordRecoveryForm = () => {
         let is_valid = verifyFormFields(form_data);
         is_form_ready = is_valid;
         form_data = [...form_data];
     }
 
-    const login = () => {
+    const sendRecoveryLink = () => {
         if (is_form_ready) {
-            password_recovery_request.do();
+            const on_success = response => {
+                newNotification("Se ha enviado un correo electronico con el enlace para recuperar su contraseña");
+            }
+
+            const on_error = status_code => {
+                if (status_code === 400) {
+                    newNotification("El correo electronico no es valido");
+                } else {
+                    newNotification(`Ha ocurrido un error, por favor intente mas tarde(${status_code})`);
+                }
+            }
+
+            password_recovery_request.do(on_success, on_error);
         }
     }
 
-    const aside_img_url = "/resources/Fotografias/Corde-164-original.webp";
 </script>
 
 <CordeliaPants>
@@ -43,14 +55,14 @@
                         isClear={true}
                         isSquared={true}
                         input_label={field.name}
-                        onEnterPressed={verifyLoginForm}
-                        onBlur={verifyLoginForm}
+                        onEnterPressed={verifyPasswordRecoveryForm}
+                        onBlur={verifyPasswordRecoveryForm}
                     />
                 </div>
             {/each}
         </div>
         <div id="prf-lf-form-controls">
-            <button on:click={() => push('/login')} id="prf-lf-login-btn" class="full-btn">Enviar link</button>
+            <button on:click={sendRecoveryLink} id="prf-lf-login-btn" class="full-btn">Enviar link</button>
         </div>
     </div>
 </CordeliaPants>

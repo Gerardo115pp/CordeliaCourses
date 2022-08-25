@@ -69,9 +69,19 @@ export class PasswordRecoveryRequest {
 
     toJson = attributesToJson.bind(this);
 
-    do = () => {
+    do = (on_success, on_error) => {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
+        
+        const request = new Request(`${cordelia_server}/password-recovery`, {method: 'POST', headers: headers, body: this.toJson()});
+        fetch(request)
+            .then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    return on_success(response);
+                } else {
+                    on_error(response.status);
+                }
+            })
     }
 }
 export class GetCustomerCoursesRequest {
