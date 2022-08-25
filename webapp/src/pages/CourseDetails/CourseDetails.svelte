@@ -6,9 +6,7 @@
     import { GetCourseRequest } from '../../libs/HttpRequests';
     import cordelia_storage from "../../libs/local_storage";
     import { onMount } from 'svelte';
-    import NotificationsBubble from "../../components/Notifications/NotificationsBubble.svelte";
     
-    let notification_text = "";
     let course_data = {
         classes: [
             {
@@ -65,7 +63,6 @@
 </script>
 
 
-<NotificationsBubble {notification_text}/>
 <main id="course-details-page">
     <div id="radagon-icon" class="erdtree">
         {@html radagon_icon}
@@ -84,7 +81,7 @@
                 </div>
             </div>
             <div id="cdp-cp-sidepanel">
-                <SideBar on:notification_triggered={handleNotification}  {course_data} bind:selected_class={selected_class}/>
+                <SideBar {course_data} bind:selected_class={selected_class}/>
             </div>
             <div id="cdp-cp-tabs">
                 <div on:click={() => setTab(coureses_panel_tabs.DESCRIPTION)} class="cdp-cp-tab {selected_tab === coureses_panel_tabs.DESCRIPTION ? 'cdp-cp-tab-selected' : ''}">Descripcion</div>

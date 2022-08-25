@@ -3,6 +3,7 @@
     import { routes } from "./routes.js";
     import Navbar from "./components/Navbar.svelte";
     import Footer from "./components/Footer.svelte";
+    import NotificationsPopup from "./components/Notifications/NotificationsPopup.svelte";
 </script>
 
 <style global>
@@ -329,6 +330,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/tpf7knz.css">
 </svelte:head>
 <div id="page-content">
+    <NotificationsPopup />
     <Navbar/>
     <div id="content-wrap">
         <Router {routes}/>

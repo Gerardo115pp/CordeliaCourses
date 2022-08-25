@@ -3,6 +3,7 @@
     import CordeliaPants from '../../components/PantsBackground.svelte';
     import cordelia_storage from '../../libs/local_storage';
     import { LoginRequest } from '../../libs/HttpRequests';
+    import { newNotification } from '../../components/Notifications/events';
     import Input from '../../components/Input.svelte';
     import { push, link } from 'svelte-spa-router';
     import { onMount } from 'svelte';
@@ -35,12 +36,24 @@
 
     const login = () => {
         if (is_form_ready) {
-            login_request.do(data => {
+            const on_success = data => {
                 if (data.token !== undefined) {
                     cordelia_storage.Token = data.token;
                     window.queueMicrotask(() => push('/courses'));
                 }
-            });
+            };
+
+            const on_error = status_code => {
+                if (status_code === 401) {
+                    newNotification("Correo o contraseña incorrectos");
+                } else {
+                    newNotification(`Error inesperado: ${status_code}`);
+                }
+            };
+
+            login_request.do(on_success, on_error);
+        } else {
+            newNotification("Por favor, completa todos los campos");
         }
     }
 

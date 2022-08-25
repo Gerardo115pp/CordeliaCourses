@@ -1,9 +1,11 @@
 <script>
+    import NotificationBubble from '../../components/Notifications/NotificationsBubble.svelte';
+    import CordeliaPants from '../../components/PantsBackground.svelte';
     import FieldData, { verifyFormFields } from '../../libs/FieldData';
     import { SignUpRequest } from '../../libs/HttpRequests';
     import Input from '../../components/Input.svelte';
     import { push, link } from 'svelte-spa-router';
-    import CordeliaPants from '../../components/PantsBackground.svelte';
+import { newNotification } from '../../components/Notifications/events';
 
     const signup_request = new SignUpRequest();
     let is_form_ready = false;
@@ -45,11 +47,22 @@
 
     const signup = () => {
         if (is_form_ready) {
-            signup_request.do(() => push('/login'));
+            signup_request.do(status_code => {
+                if(status_code === 204) {
+                    push('/login');
+                } else if (status_code === 409) {
+                    newNotification("Ya existe una cuenta con este correo");
+                } else if (status_code === 406) {
+                    newNotification("Por favor, revisa los datos ingresados");
+                } else {
+                    newNotification(`Error inesperado: ${status_code}`);
+                }
+            });
         }
     }
 
 </script>
+
 
 <CordeliaPants>
     <div slot="form" id="clp-signup-form">

@@ -1,8 +1,7 @@
 <script>
-    import check_icon from "../../../icons/Check.svg";
-    import { createEventDispatcher } from "svelte";
+import { newNotification } from "../../../components/Notifications/events";
 
-    const dispatch = createEventDispatcher();
+    import check_icon from "../../../icons/Check.svg";
 
     export let course_data = {
         classes: [
@@ -60,10 +59,7 @@ const getClassTitlePrefix = class_num => {
         });
 
         if (!isClassUnlocked(class_data)) {
-            dispatch("notification_triggered", {
-                message: `Esta clase se desbloqueará el ${human_readable_date}`,
-                type: "error"
-            });
+            newNotification(`Esta clase se desbloquea el ${human_readable_date}`);
             return;
         }
 

@@ -20,7 +20,7 @@ export class LoginRequest {
 
     toJson = attributesToJson.bind(this);
 
-    do = callback => {
+    do = (callback, on_error) => {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         console.log("LoginRequest: " + this.toJson());
@@ -28,7 +28,13 @@ export class LoginRequest {
         const request = new Request(`${cordelia_server}/customers/customer/auth`, {method: 'POST', headers: headers, body: this.toJson()});
         
         fetch(request)
-            .then(response => response.json())
+            .then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    return response.json().then(data => callback(data));
+                } else {
+                    on_error(response.status);
+                }
+            })
             .then(data => {
                 return callback(data);
             });
