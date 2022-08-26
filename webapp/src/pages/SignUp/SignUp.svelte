@@ -48,7 +48,7 @@ import { newNotification } from '../../components/Notifications/events';
     const signup = () => {
         if (is_form_ready) {
             signup_request.do(status_code => {
-                if(status_code === 204) {
+                if(status_code >= 200 && status_code < 300) {
                     push('/login');
                 } else if (status_code === 409) {
                     newNotification("Ya existe una cuenta con este correo");
