@@ -10,7 +10,7 @@
     let is_form_ready = false;
 
     let form_data = [
-        new FieldData('customer_email', /[^;\'\s\n]/, 'Correo electronico', 'email')
+        new FieldData('customer_email', /[^;\'\s\n]/, 'Correo electrónico', 'email')
     ]
 
     // Link FormData to login_request

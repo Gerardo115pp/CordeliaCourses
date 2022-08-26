@@ -17,7 +17,7 @@
 
     /* CSS variables */
     export let input_color = "var(--theme-color)";
-    export let input_dark_color = "var(--dark-color)";
+    export let input_dark_color = "var(--dark-light-color)";
     export let border_color = "var(--theme-color)";
     export let title_font = "var(--font-title)";
     export let text_font = "var(--font-text)";
@@ -110,6 +110,7 @@
     }
 
     .input-container input {
+        font-family: var(--libery-input-text-font);
         width: 100%;
         display: flex;
         background: none;
@@ -130,7 +131,7 @@
     .input-container input::placeholder {
         font-family: var(--libery-input-text-font);
         color: var(--placeholder-color);
-        text-transform: lowercase;
+        text-transform: unset;
     }
 
     input::-webkit-outer-spin-button,
@@ -156,6 +157,10 @@
 
     .input-container > input[type='password'] {
         letter-spacing: .5em;
+    }
+
+    .input-container > input[type='password']::placeholder {
+        letter-spacing: 0.4px;
     }
 
 

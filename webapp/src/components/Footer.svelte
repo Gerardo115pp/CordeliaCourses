@@ -56,7 +56,7 @@
             </div>
             <div id="cnf-cw-bottom-options">
                 <div id="cnf-cw-bo-wrapper">
-                    <a href="https://cordeliaruiz.com/terminos-y-condiciones/">terminos y condiciones</a>
+                    <a href="https://cordeliaruiz.com/terminos-y-condiciones/">términos y condiciones</a>
                     <a href="https://cordeliaruiz.com/aviso-de-privacidad/">aviso de privacidad</a>
                 </div>
             </div>
@@ -97,7 +97,8 @@
         }
         
         #cbw-wrapper h3 {
-            font-size: var(--font-size-h2)
+            font-size: 35px;
+            text-transform: uppercase;
         }
         
         #cbw-socials-wrapper {

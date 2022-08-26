@@ -12,7 +12,7 @@ import { newNotification } from '../../components/Notifications/events';
 
     let form_data = [
         new FieldData('customer_name', /^[A-z\s]*$/, 'Nombre'),
-        new FieldData('customer_email', /[^;\'\s\n]*/, 'Correo electronico', 'email'),
+        new FieldData('customer_email', /[^;\'\s\n]*/, 'Correo electrónico', 'email'),
         new FieldData('customer_password', /[^;\s\n]{8,16}/, 'contraseña', 'password')
     ]
 

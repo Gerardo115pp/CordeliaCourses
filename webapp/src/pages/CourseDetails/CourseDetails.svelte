@@ -84,7 +84,7 @@
                 <SideBar {course_data} bind:selected_class={selected_class}/>
             </div>
             <div id="cdp-cp-tabs">
-                <div on:click={() => setTab(coureses_panel_tabs.DESCRIPTION)} class="cdp-cp-tab {selected_tab === coureses_panel_tabs.DESCRIPTION ? 'cdp-cp-tab-selected' : ''}">Descripcion</div>
+                <div on:click={() => setTab(coureses_panel_tabs.DESCRIPTION)} class="cdp-cp-tab {selected_tab === coureses_panel_tabs.DESCRIPTION ? 'cdp-cp-tab-selected' : ''}">Descripción</div>
                 <div on:click={() => setTab(coureses_panel_tabs.OPINIONS)} class="cdp-cp-tab {selected_tab === coureses_panel_tabs.OPINIONS ? 'cdp-cp-tab-selected' : ''}">Opiniones</div>
                 <div on:click={() => setTab(coureses_panel_tabs.RESOURCES)} class="cdp-cp-tab {selected_tab === coureses_panel_tabs.RESOURCES ? 'cdp-cp-tab-selected' : ''}">Ver Archivos</div>
             </div>
@@ -248,6 +248,7 @@
         font-family: var(--font-texts);
         font-size: var(--font-size-h4);
         color: var(--theme-five-color);
+        /* font-weight: 600; */
         margin-bottom: var(--spacing-3);
     }
 

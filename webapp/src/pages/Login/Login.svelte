@@ -19,8 +19,8 @@
     let is_form_ready = false;
 
     let form_data = [
-        new FieldData('customer_email', /[^;\'\s\n]/, 'Correo electronico', 'email'),
-        new FieldData('customer_password', /[^;\s\n]/, 'Contrasena', 'password')
+        new FieldData('customer_email', /[^;\'\s\n]/, 'Correo electrónico', 'email'),
+        new FieldData('customer_password', /[^;\s\n]/, 'Contraseña', 'password')
     ]
 
     // Link FormData to login_request
@@ -80,7 +80,7 @@
             {/each}
         </div>
         <div id="clp-lf-form-controls">
-            <button on:click={login} id="clp-lf-login-btn" class="full-btn">Iniciar sesion</button>
+            <button on:click={login} id="clp-lf-login-btn" class="full-btn">Iniciar sesión</button>
             <button on:click={() => push("/signup")} id="clp-lf-google-btn" class="full-btn">Google</button>
             <div id="clp-lf-create-account">
                 <a href="/signup" use:link>Crear cuenta</a>
