@@ -3,6 +3,7 @@ import Redirect from './pages/Index/Redirect.svelte';
 import Login from './pages/Login/Login.svelte';
 import SignUp from './pages/SignUp/SignUp.svelte';
 import Password from './pages/Password/Password.svelte';
+import PasswordRecovery from './pages/PasswordRecovery/PasswordRecovery.svelte';
 import CourseDetails from './pages/CourseDetails/CourseDetails.svelte';
 
 
@@ -12,6 +13,7 @@ const routes = {
     '/login': Login,
     '/signup': SignUp,
     '/password': Password,
+    '/password-recovery': PasswordRecovery,
     '/course/:course_id': CourseDetails
 }
 

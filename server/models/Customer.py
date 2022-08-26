@@ -56,4 +56,7 @@ class Customer:
     def auth(self, password: str) -> bool:
         return bcrypt.checkpw(password.encode('utf-8'), self.password.encode('utf-8'))
         
-        
+    def changePassword(self, new_password: str) -> None:
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(new_password.encode('utf-8'), salt)
+        self.password = hashed.decode('utf-8')

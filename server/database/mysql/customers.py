@@ -23,6 +23,12 @@ class CustomersRepository:
             cursor.execute(f"INSERT INTO customers VALUES ('{customer.id}', '{customer.name}', '{customer.last_name}', '{customer.google_code}', '{customer.password}', '{customer.email}', '{customer.last_item_check}')")
             conn.commit()
             
+    def updatePassword(self, customer: Customer) -> None:
+        with MysqlConnection(self.config) as conn:
+            cursor = conn.cursor()
+            cursor.execute(f"UPDATE `customers` SET `password` = '{customer.password}' WHERE `id` = '{customer.id}'")
+            conn.commit()
+            
     def getByEmail(self, email: str) -> Customer:
         with MysqlConnection(self.config) as conn:
             cursor = conn.cursor(dictionary=True)

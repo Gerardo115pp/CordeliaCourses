@@ -62,6 +62,33 @@ export class SignUpRequest {
     }
 }
 
+export class ChangePasswordRequest {
+    constructor() {
+        this._token = "";
+        this.new_password = "";
+    }
+
+    toJson = attributesToJson.bind(this);
+
+    do = (on_success, on_error) => {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', `Bearer ${this._token}`);
+
+        const request = new Request(`${cordelia_server}/customers/customer/password`, {method: 'PATCH', headers: headers, body: this.toJson()});
+    
+        fetch(request)
+            .then(response => {
+
+                if (response.status >= 200 && response.status < 300) {
+                    on_success(response);
+                } else {
+                    on_error(response.status);
+                }
+            })
+    }
+}
+
 export class PasswordRecoveryRequest {
     constructor() {
         this.email = "";

@@ -88,7 +88,7 @@ def createApp():
         
         
         # send email
-        mail_body = f"Your password recovery link is: {app.config['CORDELIA_WEBAPP']}/password-recovery?token={token}"
+        mail_body = f"Your password recovery link is: {app.config['CORDELIA_WEBAPP']}/#/password-recovery?token={token}"
         email_message = EmailMessage()
         email_message["Subject"] = "Password recovery"
         email_message["From"] = app.config["MAIL_USERNAME"]
@@ -102,7 +102,7 @@ def createApp():
             server.sendmail(app.config["MAIL_USERNAME"], email, email_message.as_string())
         
         
-        return make_response("", 200)
+        return make_response("", 202)
  
     # customers repository
     customers_repo: CustomersRepo.CustomersRepo = mysql_database.createCustomersRepo()

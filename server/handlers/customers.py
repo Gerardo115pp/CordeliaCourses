@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, make_response, current_app
 from typing import List, Dict
 from models import Customer
+from middleware.auth import getTokenString
 from workflows.acceses import createCustomerAccesses
 import Http.customers as requests_forms
 from Http.customers import LoginPasswordCustomerRequest as login_form, CreatePasswordCustomerRequest as register_form
@@ -69,3 +70,41 @@ def authenticateCustomer():
     
     jwt_token = jwt.encode(jwt_payload, jwt_secret, algorithm='HS256')
     return make_response(jsonify({'token': jwt_token}), 200)
+
+@customers_handler.route('customer/password', methods=['PATCH'])
+def changePassword():
+    token_string = getTokenString(request.headers)
+    jwt_secret = current_app.config['JWT_SECRET']
+    
+    try:
+        jwt_headers = jwt.get_unverified_header(token_string)
+        data = jwt.decode(token_string, jwt_secret, algorithms=[jwt_headers['alg']])
+        token_payload = {
+            "email": data['email'],
+            "customer": data['customer'],
+            "exp": data['exp']
+        }
+    except jwt.InvalidSignatureError:
+        print(f"Someone is doing something fishy with the token: {token_string}")
+        return make_response(jsonify({'message': 'invalid token'}), 401)
+    except jwt.ExpiredSignatureError:
+        print(f"Expired token: {token_string}")
+        return make_response(jsonify({'message': 'token expired'}), 408)
+    except Exception as e:
+        print(e)
+        return make_response(jsonify({'message': 'invalid token'}), 401)
+    
+    new_password = request.json['password']
+    if len(new_password) < 8:
+        return make_response(jsonify({'message': 'password too short'}), 406)
+    
+    customer: Customer = repository.customers.getByEmail(token_payload['email'])
+    customer.changePassword(new_password)
+    
+    repository.customers.updatePassword(customer)
+    return make_response(jsonify({'message': 'password changed'}), 200)
+    
+    
+    
+    
+    

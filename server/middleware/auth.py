@@ -7,6 +7,18 @@ import models
 import jwt
 import os
 
+def getTokenString(headers) -> str:
+    """ 
+        returns the token string from the request headers
+    """
+    token_string = ""
+    
+    if 'Authorization' not in headers:
+        return token_string
+    
+    token_string = headers['Authorization']
+    token_string = token_string.removeprefix('Bearer ')
+    return token_string
 
 def token_required(f: Callable) -> Callable:
     @wraps(f)

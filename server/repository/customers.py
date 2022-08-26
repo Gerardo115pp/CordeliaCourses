@@ -13,6 +13,7 @@ class CustomersRepoMeta(type):
         return (hasattr(subclass, 'getAll') and  callable(subclass.getAll)) and \
                 (hasattr(subclass, 'insert') and  callable(subclass.insert)) and \
                 (hasattr(subclass, 'getByEmail') and  callable(subclass.getByEmail)) and \
+                (hasattr(subclass, 'updatePassword') and  callable(subclass.updatePassword)) and \
                 (hasattr(subclass, 'getById') and  callable(subclass.getById))
                 
 class CustomersRepo(metaclass=CustomersRepoMeta):
@@ -44,6 +45,12 @@ class CustomersRepo(metaclass=CustomersRepoMeta):
         """
         raise NotImplementedError()
     
+    def updatePassword(self, customer: Customer) -> None:
+        """
+            Updates a customer password
+        """
+        raise NotImplementedError()
+    
     
 implementation: CustomersRepo = None
 
@@ -69,3 +76,6 @@ def getByEmail(email: str) -> Customer:
 
 def getById(id: str) -> Customer:
     return implementation.getById(id)
+
+def updatePassword(customer: Customer) -> None:
+    implementation.updatePassword(customer)
