@@ -73,7 +73,8 @@ module.exports = (env, argv) => {
 	config.plugins.push(
 		new webpack.DefinePlugin({
 			"JD_ADDRESS_ENV": JSON.stringify(env.JD_ADDRESS),
-			"CORDELIA_API": JSON.stringify(process.env.CORDELIA_API)
+			"CORDELIA_API": JSON.stringify(process.env.CORDELIA_API),
+			"CORDELIA_STATIC_FILES": JSON.stringify(process.env.STATIC_FILES)
 		})
 	);
 

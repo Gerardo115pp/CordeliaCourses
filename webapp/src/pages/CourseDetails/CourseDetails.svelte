@@ -3,7 +3,7 @@
     import law_of_regression from "../../icons/Degradado9.svg";
     import SideBar from "./page-components/SideBar.svelte";
     import radagon_icon from "../../icons/Degradado4.svg";
-    import { GetCourseRequest } from '../../libs/HttpRequests';
+    import { GetCourseRequest, static_files_prefix } from '../../libs/HttpRequests';
     import cordelia_storage from "../../libs/local_storage";
     import { onMount } from 'svelte';
     
@@ -89,12 +89,33 @@
                 <div on:click={() => setTab(coureses_panel_tabs.RESOURCES)} class="cdp-cp-tab {selected_tab === coureses_panel_tabs.RESOURCES ? 'cdp-cp-tab-selected' : ''}">Ver Archivos</div>
             </div>
             <div id="cdp-cp-controls">
-                <div id="cdp-cp-desc-control">
-                    <h3 class="cdp-cp-dc-title">{course_data.classes[selected_class].title}</h3>
-                    <p class="cdp-cp-dc-desc">
-                        {course_data.classes[selected_class].description}
-                    </p>
-                </div>
+                {#if selected_tab === coureses_panel_tabs.DESCRIPTION}
+                    <div id="cdp-cp-desc-control">
+                        <h3 class="cdp-cp-dc-title">{course_data.classes[selected_class].title}</h3>
+                        <p class="cdp-cp-dc-desc">
+                            {course_data.classes[selected_class].description}
+                        </p>
+                    </div>
+                {:else if selected_tab === coureses_panel_tabs.OPINIONS}
+                    here are some opinions
+                {:else if selected_tab === coureses_panel_tabs.RESOURCES}
+                    {#if course_data.classes[selected_class].resource_path !== ""}
+                         <div id="cdp-cp-desc-control">
+                             <h3 class="cdp-cp-dc-title">recursos de la clase</h3>
+                             <p class="cdp-cp-dc-desc">
+                                 Puedes encontrar los recursos de la clase 
+                                 <a href="{static_files_prefix}/{course_data.classes[selected_class].resource_path}" target="_blank" rel="noopener noreferrer">aquí</a>
+                             </p>
+                         </div>
+                    {:else}
+                        <div id="cdp-cp-desc-control">
+                            <h3 class="cdp-cp-dc-title">recursos de la clase</h3>
+                            <p class="cdp-cp-dc-desc">
+                                No hay recursos disponibles para esta clase aún.
+                            </p>
+                        </div>
+                    {/if}
+                {/if}
             </div>
         </div>
     </div>

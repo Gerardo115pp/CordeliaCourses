@@ -22,9 +22,7 @@ import { newNotification } from "../../../components/Notifications/events";
     export let selected_class = 0;
 
     const isClassUnlocked = class_data => {
-        const today = new Date();
-        const unlock_date = new Date(class_data.unlocks_on);
-        return today >= unlock_date;
+        return class_data.resource_path !== "";
     }
 
     const getUnlockedPercentage = classes => {
@@ -40,32 +38,25 @@ import { newNotification } from "../../../components/Notifications/events";
         return percentage;
     }
 
-const getClassTitlePrefix = class_num => {
-    let prefix = class_num.toString();
-    if (class_num < 10) {
-        prefix = `0${prefix}`;
+    const getClassTitlePrefix = class_num => {
+        let prefix = class_num.toString();
+        if (class_num < 10) {
+            prefix = `0${prefix}`;
+        }
+        return prefix+". ";
     }
-    return prefix+". ";
-}
 
     const selectClass = class_index => {
         const class_data = course_data.classes[class_index];
-        const unlock_date = new Date(class_data.unlocks_on);
-        const human_readable_date = unlock_date.toLocaleDateString("es-MX", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        });
 
         if (!isClassUnlocked(class_data)) {
-            newNotification(`Esta clase se desbloquea el ${human_readable_date}`);
+            newNotification('Esta clase aun no está disponible');
             return;
         }
 
         selected_class = class_index;
-        
     }
+
 </script>
 
 <div id="course-data-sidebar">

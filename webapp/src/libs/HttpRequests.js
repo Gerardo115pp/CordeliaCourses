@@ -1,5 +1,6 @@
 
 const cordelia_server = CORDELIA_API;
+export const static_files_prefix = CORDELIA_STATIC_FILES;
 
 function attributesToJson() {
     const json_data = {};
