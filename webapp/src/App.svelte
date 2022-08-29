@@ -22,6 +22,7 @@
         --dark-light-color: #00000080;
         --placeholder-color: #00000025;
         --clear-color: #F3F4F1;
+        --clear-background: white;
         --theme-gradient: linear-gradient(270deg, #F3F4F1 0%, #E6E2DF 100%);
         --danger: #E87156;
         --ready: #62C77A;
@@ -290,7 +291,28 @@
         animation: slide-fwd-bottom 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     }
     
+    @keyframes scale-in-ver-top {
+        0% {
+            -webkit-transform: scaleY(0);
+                    transform: scaleY(0);
+            -webkit-transform-origin: 100% 0%;
+                    transform-origin: 100% 0%;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: scaleY(1);
+                    transform: scaleY(1);
+            -webkit-transform-origin: 100% 0%;
+                    transform-origin: 100% 0%;
+            opacity: 1;
+        }
+    }
     
+    :global(.scale-in-ver-top) {
+        -webkit-animation: scale-in-ver-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                animation: scale-in-ver-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
     /*=====  End of Animations  ======*/
     
     

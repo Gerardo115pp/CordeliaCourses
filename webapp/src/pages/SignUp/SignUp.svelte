@@ -17,8 +17,8 @@ import { newNotification } from '../../components/Notifications/events';
     ]
 
     form_data[0].placeholder = "Nombre Apellido";
-    form_data[1].placeholder = "correo con el que hiciste tu compra";
-    form_data[2].placeholder = "nueva contraseña";
+    form_data[1].placeholder = "Correo con el que hiciste tu compra";
+    form_data[2].placeholder = "Nueva contraseña de 8+ caracteres";
 
     // Link FormData to login_request
         let first_name = "";

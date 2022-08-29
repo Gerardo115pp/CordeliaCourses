@@ -248,7 +248,7 @@
         font-family: var(--font-texts);
         font-size: var(--font-size-h4);
         color: var(--theme-five-color);
-        /* font-weight: 600; */
+        font-weight: 600;
         margin-bottom: var(--spacing-3);
     }
 
