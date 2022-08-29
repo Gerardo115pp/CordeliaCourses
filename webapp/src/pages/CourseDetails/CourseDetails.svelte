@@ -3,6 +3,7 @@
     import law_of_regression from "../../icons/Degradado9.svg";
     import SideBar from "./page-components/SideBar.svelte";
     import radagon_icon from "../../icons/Degradado4.svg";
+    import Opinions from "./page-components/Opinions.svelte";
     import { GetCourseRequest, static_files_prefix } from '../../libs/HttpRequests';
     import cordelia_storage from "../../libs/local_storage";
     import { onMount } from 'svelte';
@@ -30,7 +31,7 @@
         OPINIONS: "opinions",
         RESOURCES: "resources"
     };
-    let selected_tab = coureses_panel_tabs.DESCRIPTION;
+    let selected_tab = coureses_panel_tabs.OPINIONS;
 
     window.scrollTo(0, 0);
 
@@ -97,7 +98,7 @@
                         </p>
                     </div>
                 {:else if selected_tab === coureses_panel_tabs.OPINIONS}
-                    here are some opinions
+                    <Opinions/>
                 {:else if selected_tab === coureses_panel_tabs.RESOURCES}
                     {#if course_data.classes[selected_class].resource_path !== ""}
                          <div id="cdp-cp-desc-control">
