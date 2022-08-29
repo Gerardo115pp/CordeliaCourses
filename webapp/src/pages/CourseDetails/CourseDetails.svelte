@@ -20,7 +20,7 @@
             }
         ],
         description: "",
-        id: 0,
+        id: "",
         name: "",
         teacher_name: ""
     };
@@ -31,7 +31,7 @@
         OPINIONS: "opinions",
         RESOURCES: "resources"
     };
-    let selected_tab = coureses_panel_tabs.OPINIONS;
+    let selected_tab = coureses_panel_tabs.DESCRIPTION;
 
     window.scrollTo(0, 0);
 
@@ -97,8 +97,8 @@
                             {course_data.classes[selected_class].description}
                         </p>
                     </div>
-                {:else if selected_tab === coureses_panel_tabs.OPINIONS}
-                    <Opinions/>
+                {:else if selected_tab === coureses_panel_tabs.OPINIONS && course_data.classes[selected_class].id !== "" && course_data.classes[selected_class].resource_path !== ""}
+                    <Opinions course_id={course_id} class_id={`${selected_class+1}`}/>
                 {:else if selected_tab === coureses_panel_tabs.RESOURCES}
                     {#if course_data.classes[selected_class].resource_path !== ""}
                          <div id="cdp-cp-desc-control">

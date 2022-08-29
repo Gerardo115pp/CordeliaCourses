@@ -112,6 +112,7 @@ export class PasswordRecoveryRequest {
             })
     }
 }
+
 export class GetCustomerCoursesRequest {
     constructor() {
         this.token = ""
@@ -177,5 +178,69 @@ export class GetDataVersion {
             .then(data => {
                 return callback(data);
             });
+    }
+}
+
+export class GetCourseOpinionsRequest {
+    constructor(token, course_id, class_id) {
+        this._token = token;
+        this.course_id = course_id;
+        this.class_id = class_id;
+    }
+
+    toJson = attributesToJson.bind(this);
+
+    do = (on_success, on_error) => {
+
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', `Bearer ${this.token}`);
+
+        const request = new Request(`${cordelia_server}/opinions/opinion?course_id=${this.course_id}&class_id=${this.class_id}`, {method: 'GET', headers: headers});
+        fetch(request)
+            .then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    return response.json().then(data => on_success(data));
+                } else {
+                    on_error(response.status);
+                }
+            });
+    }
+}
+
+export class PostNewOpinion {
+    constructor(token, course_id, class_id) {
+        this._token = token;
+        this.course_id = course_id;
+        this.class_id = class_id;
+        this.body = "";
+    }
+
+    toJson = attributesToJson.bind(this);
+
+    do = (on_success, on_error) => {
+
+
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', `Bearer ${this._token}`);
+
+        const request_body = {
+            course_id: this.course_id,
+            class_id: this.class_id,
+            body: this.body,
+            isodate: new Date().toISOString()
+        }
+
+        const request = new Request(`${cordelia_server}/opinions/opinion`, {method: 'POST', headers: headers, body: JSON.stringify(request_body)});
+        fetch(request)
+            .then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    return on_success(response);
+                } else {
+                    on_error(response.status);
+                }
+            });
+
     }
 }

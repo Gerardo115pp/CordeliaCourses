@@ -5,9 +5,11 @@ import smtplib
 from flask_cors import CORS
 import repository.customers as CustomersRepo
 import repository.courses as CoursesRepo
+import repository.opinions as OpinionsRepo
 import database.mysql as mysql_database
 from handlers.customers import customers_handler
 from handlers.courses import courses_handler
+from handlers.opinions import opinions_handler
 from workflows import acceses
 from datetime import datetime
 import os
@@ -44,6 +46,7 @@ def createApp():
 
     app.register_blueprint(customers_handler, url_prefix="/customers")
     app.register_blueprint(courses_handler, url_prefix="/courses")
+    app.register_blueprint(opinions_handler, url_prefix="/opinions")
 
     # Setting up / handlers
 
@@ -111,6 +114,10 @@ def createApp():
     # courses repository
     courses_repo: CoursesRepo.CoursesRepo = mysql_database.createCoursesRepo()
     CoursesRepo.setRepository(courses_repo)
+    
+    # opinions repository
+    opinions_repo: OpinionsRepo.OpinionsRepo = mysql_database.createOpinionsRepo()
+    OpinionsRepo.setRepository(opinions_repo)
     
     """ SETTING UP COURSES DATA """
     special_access_map = CoursesRepo.getSpecialAccessMap()

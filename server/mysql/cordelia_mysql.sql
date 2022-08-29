@@ -40,6 +40,21 @@ CREATE TABLE `purchases` (
     CONSTRAINT `fk_access_id` FOREIGN KEY (`access_id`) REFERENCES `accesses` (`product_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `opinions`;
+CREATE TABLE `opinions` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `customer_id` VARCHAR(70) NOT NULL,
+    `course_id` INT UNSIGNED NOT NULL,
+    `class_id` VARCHAR(10) NOT NULL,
+    `username` VARCHAR(70) NOT NULL,
+    `body` VARCHAR(255) NOT NULL,
+    `isodate` VARCHAR(255) NOT NULL,
+    CONSTRAINT `fk_customer_id_opinions` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_course_id_opinions` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 /* GET COURSES BOUGHT BY A CUSTOMER BY CUSTOMER EMAIL */
 -- SELECT * FROM `courses` WHERE `id` IN (SELECT `accesses`.`course_id` FROM `purchases`, `accesses` WHERE `accesses`.`product_id`=`purchases`.`access_id` AND `purchases`.`customer_id`=(SELECT `id` FROM `customers` WHERE `email`='theronin115@gmail.com'));
 

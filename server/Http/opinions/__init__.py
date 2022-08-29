@@ -60,21 +60,22 @@ def createRequest(request_type: Request, args: Dict[str, Any]) -> Request:
     return request_type.fromDict(args)
 
 @dataclass
-class CreatePasswordCustomerRequest:
+class PostNewOpinionRequest:
     """
-        A request to create a customer using a password instead of a google account
+        A request to post a new opinion
     """
-    name: str
-    last_name: str
-    email: str
-    password: str
+    course_id: int
+    class_id: str
+    body: str
+    isodate: str
+    
     
     @classmethod
-    def fromDict(cls, dict: Dict[str, Any]) -> 'CreatePasswordCustomerRequest':
+    def fromDict(cls, dict: Dict[str, Any]) -> 'PostNewOpinionRequest':
         """
             Initializes the request from a dict
         """
-        new_instance = cls(name=dict["name"], last_name=dict["last_name"], email=dict["email"], password=dict["password"])
+        new_instance = cls(course_id=dict['course_id'], class_id=dict['class_id'], body=dict['body'], isodate=dict['isodate'])
         return new_instance
 
     def toDict(self) -> Dict[str, Any]:
@@ -82,28 +83,3 @@ class CreatePasswordCustomerRequest:
             Returns a dict representation of the request
         """
         return asdict(self)
-    
-@dataclass
-class LoginPasswordCustomerRequest:
-    """
-        A request to login a customer using a password instead of a google account
-    """
-    email: str
-    password: str
-    
-    @classmethod
-    def fromDict(cls, dict: Dict[str, Any]) -> 'LoginPasswordCustomerRequest':
-        """
-            Initializes the request from a dict
-        """
-        new_instance = cls(email=dict["email"], password=dict["password"])
-        return new_instance
-
-    def toDict(self) -> Dict[str, Any]:
-        """
-            Returns a dict representation of the request
-        """
-        return asdict(self)
-    
-
-    

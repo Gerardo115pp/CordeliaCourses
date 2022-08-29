@@ -1,9 +1,13 @@
 <script>
-
+    import { PostNewOpinion, GetCourseOpinionsRequest} from  '../../../libs/HttpRequests';
     import Input from "../../../components/Input.svelte";
     import FieldData from "../../../libs/FieldData";
+    import cordelia_storage from '../../../libs/local_storage';
+    import { newNotification } from '../../../components/Notifications/events';
+    import { onMount } from 'svelte';
 
-    // export let class_id = "1";
+    export let class_id = undefined;
+    export let course_id = undefined;
     export let opinions = [
         {
             username: "Some happy fellow",
@@ -57,7 +61,11 @@
         },
     ]
 
-    const new_opinion = new FieldData("new-opinion", /[.\n]+/, "opinion-body");
+    onMount(() => {
+        requestClassMessages();
+    })
+
+    const new_opinion = new FieldData("new-opinion", /[.\n]{1, 245}/, "opinion-body");
     new_opinion.placeholder = "que opinas?";
 
     const date_formatter = new Intl.DateTimeFormat("es-ES", {
@@ -67,6 +75,53 @@
         hour: "numeric",
         minute: "numeric"
     });
+
+    const requestClassMessages = () => {
+        if (class_id === undefined|| course_id === undefined) {
+            console.error("class_id or course_id is undefined");
+            return;
+        }
+
+        const request = new GetCourseOpinionsRequest(cordelia_storage.Token, course_id, class_id);
+
+        const on_success = opinions_data => {
+            console.log(opinions_data);
+            opinions = opinions_data;
+        }
+
+        const on_error = error_code => {
+            newNotification(`Error desconocido: ${error_code}`);
+        }
+
+        request.do(on_success, on_error);
+    }
+
+    const postOpinion = () => {
+        const opinion_body = new_opinion.getFieldValue();
+        if (opinion_body.length === 0) {
+            return;
+        }
+
+        if (opinion_body.length > 245) {
+            newNotification("El mensaje no puede tener mas de 244 caracteres");
+            return;
+        }
+
+        const request = new PostNewOpinion(cordelia_storage.Token, course_id, class_id);
+        console.log(request._token)
+        request.body = opinion_body;
+        new_opinion.clear();
+        
+        const on_success = () => {
+            requestClassMessages();
+        }
+
+        const on_error = error_code => {
+            newNotification(`Error desconocido: ${error_code}`);
+        }
+
+        request.do(on_success, on_error);
+    }
 </script>
 
 <div id="opinions">
@@ -93,13 +148,13 @@
             <div id="writter-wrapper">
                 <Input 
                     isClear
-                    
+                    onEnterPressed={postOpinion}
                     input_padding="0.5rem 1rem"
                     autocomplete="off"
                     field_data={new_opinion}
                 />
             </div>
-            <button class="full-btn">Enviar</button>
+            <button on:click={postOpinion}  class="full-btn">Enviar</button>
         </div>
     </div>
 </div>

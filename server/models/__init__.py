@@ -1,5 +1,6 @@
 from . import Customer as customer_module
 from . import Course as course_module
+from . import Opinion as opinion_module
 from inspect import getfullargspec
 from typing import List
 
@@ -18,3 +19,7 @@ Customer = customer_module.Customer # reassign the class, cleaner imports
 # COURSE
 course_module.allArgsPresent = _allArgsPresent # reassign the method
 Course = course_module.Course # reassign the class, cleaner imports
+
+# OPINION
+opinion_module.allArgsPresent = _allArgsPresent # reassign the method
+Opinion = opinion_module.Opinion # reassign the class, cleaner imports
