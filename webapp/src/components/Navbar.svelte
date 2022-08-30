@@ -4,7 +4,7 @@
     import search_icon from '../icons/Lupa.svg';
     import menu_icon from '../icons/Menú.svg';
     import user_icon from '../icons/Usuario.svg';
-    import store_icon from '../icons/Store.svg';
+    import store_icon from '../icons/StoreII.svg';
 
     let show_mobile_menu = false;
 
@@ -58,7 +58,9 @@
             {/if}
         </div>
         <div id="cn-aside-navoptions">
-            <div class="cn-a-navoption icon-wrapper">{@html store_icon}</div>
+            <a href="https://cordeliaruiz.com/tienda-2/">
+                <div id="wh-bag" class="cn-a-navoption icon-wrapper">{@html store_icon}</div>
+            </a>
             <a href="/courses" use:link>
                 <div class="cn-a-navoption icon-wrapper">{@html user_icon}</div>
             </a>
@@ -94,7 +96,7 @@
     }
 
     #cordelia-navbar {
-        --cn-side-container-width: calc(var(--spacing-2) * 3.2);
+        --cn-side-container-width: calc(var(--spacing-2) * 5.2);
         width: 50%;
         display: grid;
         grid-template: repeat(2, 1fr) / var(--cn-side-container-width) 1fr var(--cn-side-container-width) ;
@@ -129,13 +131,17 @@
         cursor: pointer;
     }
     
+    #wh-bag.icon-wrapper {
+        width: calc(var(--spacing-2) * 1.8) !important;
+    }
+
     #cn-navoptions-wrapper {
         display: flex;
         justify-items: center;
         align-items: center;
     }
 
-    #cn-navoptions-container {
+    #cn-navoptions-container { 
         min-width:55ch;
         width: 28%;
         display: flex;
@@ -151,7 +157,7 @@
 
     #cn-aside-navoptions .icon-wrapper {
         cursor: pointer;
-        width: calc(var(--spacing-2) + calc(var(--spacing-2) * 0.2));
+        width: calc(var(--spacing-2) + calc(var(--spacing-2) * 0.5));
     }
 
     @media only screen and (max-width: 768px) {

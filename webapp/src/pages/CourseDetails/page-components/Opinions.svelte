@@ -9,56 +9,6 @@
     export let class_id = undefined;
     export let course_id = undefined;
     export let opinions = [
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
-        {
-            username: "Some happy fellow",
-            body: "Some very happy opinion from some very happy fellow about this very happy course",
-            isodate: "2020-07-10 15:00:00.000"
-        },
     ]
 
     onMount(() => {
@@ -66,7 +16,7 @@
     })
 
     const new_opinion = new FieldData("new-opinion", /[.\n]{1, 245}/, "opinion-body");
-    new_opinion.placeholder = "que opinas?";
+    new_opinion.placeholder = "¿Qué opinas?";
 
     const date_formatter = new Intl.DateTimeFormat("es-ES", {
         year: "numeric",
@@ -75,6 +25,25 @@
         hour: "numeric",
         minute: "numeric"
     });
+
+    const formatDate = date_string => {
+        let date = new Date(date_string);
+        if (date.getTime() == NaN) {
+            // parse iso string: 2021-05-05T00:00:00.000Z into date on iphone
+            let new_date = date_string.replace("T", " ").replace("Z", "");
+            new_date = new_date.split(/[- :]/);
+            alert(new_date);
+
+            let d = new Date(new_date[0], new_date[1] - 1, new_date[2], new_date[3], new_date[4], new_date[5]);
+            date = new Date(d);
+        }
+
+        try {
+            return date_formatter.format(date);
+        } catch (error) {
+            return date_string;
+        }
+    }
 
     const requestClassMessages = () => {
         if (class_id === undefined|| course_id === undefined) {
@@ -124,6 +93,8 @@
     }
 </script>
 
+
+<!-- <h2>debug 3</h2> -->
 <div id="opinions">
     <h2>Opiniones</h2>
     <div id="opinions-container">
@@ -133,7 +104,7 @@
                     <div class="opinion-header-left">
                         <div class="opinion-header-left-text">
                             <h3>{opinion.username}</h3>
-                            <p>{date_formatter.format(new Date(opinion.isodate).getTime())}</p>
+                            <p>{formatDate(opinion.isodate)}</p>
                         </div>
                     </div>
                 </div>
@@ -158,6 +129,7 @@
         </div>
     </div>
 </div>
+
 
 <style>
     #opinions {
@@ -243,3 +215,5 @@
         grid-column: 2 / 3;
     }
 </style>
+
+
