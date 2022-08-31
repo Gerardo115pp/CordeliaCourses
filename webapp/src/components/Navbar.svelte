@@ -18,7 +18,7 @@
             url: 'https://cordeliaruiz.com/tienda-2/'
         },
         {
-            name: 'Acerca de',
+            name: 'Contacto',
             url: 'https://cordeliaruiz.com/contacto/'
         },
         {
@@ -101,6 +101,7 @@
         display: grid;
         grid-template: repeat(2, 1fr) / var(--cn-side-container-width) 1fr var(--cn-side-container-width) ;
         row-gap: var(--spacing-2);
+        color: var(--dark-color);
     }
 
     #cn-cordelia-ruiz-title {
@@ -147,6 +148,11 @@
         display: flex;
         margin: 0 auto;
         justify-content: space-around;
+    }
+
+    #cn-navoptions-container a {
+        font-size: 12px;
+        font-weight: 600;
     }
 
     #cn-aside-navoptions {

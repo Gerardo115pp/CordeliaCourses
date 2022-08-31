@@ -19,6 +19,7 @@
         --theme-five-color: #AD8E79;
         --theme-light-five-color: #e6cdbc;
         --dark-color: black;
+        --dark-two-color: ##0C0C0C;
         --dark-light-color: #00000080;
         --placeholder-color: #00000025;
         --clear-color: #F3F4F1;
