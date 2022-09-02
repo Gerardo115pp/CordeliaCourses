@@ -14,6 +14,7 @@ class CustomersRepoMeta(type):
                 (hasattr(subclass, 'insert') and  callable(subclass.insert)) and \
                 (hasattr(subclass, 'getByEmail') and  callable(subclass.getByEmail)) and \
                 (hasattr(subclass, 'updatePassword') and  callable(subclass.updatePassword)) and \
+                (hasattr(subclass, 'getCustomerAccesses') and  callable(subclass.getCustomerAccesses)) and \
                 (hasattr(subclass, 'getById') and  callable(subclass.getById))
                 
 class CustomersRepo(metaclass=CustomersRepoMeta):
@@ -51,6 +52,11 @@ class CustomersRepo(metaclass=CustomersRepoMeta):
         """
         raise NotImplementedError()
     
+    def getCustomerAccesses(self, customer: Customer) -> List[int]:
+        """
+            Returns a list of accesses ids for a customer
+        """
+        raise NotImplementedError()
     
 implementation: CustomersRepo = None
 
@@ -79,3 +85,6 @@ def getById(id: str) -> Customer:
 
 def updatePassword(customer: Customer) -> None:
     implementation.updatePassword(customer)
+    
+def getCustomerAccesses(customer: Customer) -> List[int]:
+    return implementation.getCustomerAccesses(customer) # esto es tu culpa copilot pendejo de mierda, pero te amo igual

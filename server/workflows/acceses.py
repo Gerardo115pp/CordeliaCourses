@@ -23,7 +23,7 @@ def createCustomerAccesses(customer: models.Customer, special_access_map: Dict[i
     return
 
 # TODO: define a return type for this function
-def getCustomerAccess(email: str, special_acceses: Dict[int, Set[str]]) -> None:
+def getCustomerAccess(email: str, special_acceses: Dict[int, Set[str]]) -> List[int]:
     """
         Checks all the accesses a customer has, each access grants a single course so if courses.length != customer_access.length then 
         its not necessary to check woocommerce.

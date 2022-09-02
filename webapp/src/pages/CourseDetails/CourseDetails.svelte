@@ -61,6 +61,13 @@
 
     const setTab = tab_name => selected_tab = tab_name;
 
+    const getClassResourcePath = class_data => {
+        const { resource_path, resource_type } = class_data;
+        if (resource_type === "PDF") {
+            return `${static_files_prefix}/${resource_path}`;
+        }
+        return resource_path;
+    }
 </script>
 
 
@@ -105,7 +112,7 @@
                              <h3 class="cdp-cp-dc-title">recursos de la clase</h3>
                              <p class="cdp-cp-dc-desc">
                                  Puedes encontrar los recursos de la clase 
-                                 <a href="{static_files_prefix}/{course_data.classes[selected_class].resource_path}" target="_blank" rel="noopener noreferrer">aquí</a>
+                                 <a href="{getClassResourcePath(course_data.classes[selected_class])}" target="_blank" rel="noopener noreferrer">aquí</a>
                              </p>
                          </div>
                     {:else}

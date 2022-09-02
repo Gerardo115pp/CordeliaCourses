@@ -16,6 +16,17 @@ class CustomersRepository:
         
         customers_lookup = {row['email']: Customer(**row) for row in rows}
         return customers_lookup
+
+    def getCustomerAccesses(self, customer: Customer) -> List[int]:
+        current_accesses = []
+        with MysqlConnection(self.config) as conn:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(f"SELECT access_id FROM purchases WHERE customer_id = '{customer.id}'")
+            rows = cursor.fetchall()
+        for row in rows:
+            current_accesses.append(row['access_id'])
+        
+        return current_accesses
     
     def insert(self, customer: Customer) -> None:
         with MysqlConnection(self.config) as conn:

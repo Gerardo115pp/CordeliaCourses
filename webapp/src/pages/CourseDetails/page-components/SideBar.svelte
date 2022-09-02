@@ -1,5 +1,5 @@
 <script>
-import { newNotification } from "../../../components/Notifications/events";
+    import { newNotification } from "../../../components/Notifications/events";
 
     import check_icon from "../../../icons/Check.svg";
 
@@ -24,6 +24,8 @@ import { newNotification } from "../../../components/Notifications/events";
     const isClassUnlocked = class_data => {
         return class_data.resource_path !== "";
     }
+
+
 
     const getUnlockedPercentage = classes => {
         const unlocked_classes = classes.filter(isClassUnlocked);
