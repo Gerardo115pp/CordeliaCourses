@@ -8,9 +8,10 @@ class CordeliaStorage {
             courses: [],
             courses_details: {}
         }
-
+        
         this.loadData();
         this.checkDataVersion(); // async, uses fetch and if the data version is different, it will update the data 
+        console.log("CordeliaStorage constructor initialized");
     }
 
     
@@ -71,7 +72,7 @@ class CordeliaStorage {
             try {
                 this.state.courses = JSON.parse(courses);
             } catch (error) {
-                console.log(error);
+                console.log(`Error parsing courses: ${error}`);
                 this.state.courses = [];
             }
         }
@@ -81,7 +82,7 @@ class CordeliaStorage {
             try {
                 this.state.courses_details = JSON.parse(courses_details);
             } catch (error) {
-                console.log(error);
+                console.log(`Error parsing courses_details: ${error}`);
                 this.state.courses_details = {};
             }
         }
@@ -91,7 +92,7 @@ class CordeliaStorage {
             try {
                 this.data_version = JSON.parse(data_version);
             } catch (error) {
-                console.log(error);
+                console.log(`Error parsing data_version: ${error}`);
                 this.state.data_version = 1;
             }
         }
@@ -101,7 +102,7 @@ class CordeliaStorage {
             try {
                 this.token = JSON.parse(token);
             } catch (error) {
-                console.log(error);
+                console.log(`Error parsing token: ${error}`);
                 this.token = "";
             }
         }

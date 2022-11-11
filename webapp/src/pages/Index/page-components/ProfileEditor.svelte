@@ -2,6 +2,7 @@
     import cordelia_storage from '../../../libs/local_storage';
     import { link, push } from 'svelte-spa-router';
     import jwt_decode from 'jwt-decode';
+    import { signOut } from '../../../libs/cord_utils'; 
     import { onMount } from 'svelte';
 
     export let user_data = {
@@ -12,18 +13,20 @@
     };
 
     onMount(() => {
+        console.log("Mounting profile editor page");
+
         if (cordelia_storage.Token !== "") {
             const token = cordelia_storage.Token;
-            const decoded = jwt_decode(token);
-            user_data = decoded;
+            try {
+                const decoded = jwt_decode(token);
+                user_data = decoded;    
+            } catch (error) {
+                console.log(`Error decoding token: ${error}`);
+                signOut();
+            }
         }
     });
 
-
-    const signOut = () => {
-        cordelia_storage.removeToken();
-        push('/login');
-    }
 
 </script>
     

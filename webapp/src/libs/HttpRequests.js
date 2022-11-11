@@ -120,7 +120,7 @@ export class GetCustomerCoursesRequest {
 
     toJson = attributesToJson.bind(this);
 
-    do = callback => {
+    do = (on_success, on_error) => {
         if (this.token === "") {
             return;
         }
@@ -131,9 +131,12 @@ export class GetCustomerCoursesRequest {
 
         const request = new Request(`${cordelia_server}/courses/`, {method: 'GET', headers: headers});
         fetch(request)
-            .then(response => response.json())
-            .then(data => {
-                return callback(data);
+            .then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    return response.json().then(data => on_success(data));
+                } else {
+                    on_error(response.status);
+                }
             });
     }
 }
@@ -174,9 +177,12 @@ export class GetDataVersion {
 
         const request = new Request(`${cordelia_server}/data-version`, {method: 'GET', headers: headers});
         fetch(request)
-            .then(response => response.json())
-            .then(data => {
-                return callback(data);
+            .then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    console.log("Data version: ");
+                    console.log(response.body);
+                    return response.json().then(data => callback(data));
+                }
             });
     }
 }

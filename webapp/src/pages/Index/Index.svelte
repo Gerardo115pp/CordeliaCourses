@@ -6,11 +6,14 @@
     import { GetCustomerCoursesRequest } from '../../libs/HttpRequests';
     import { onMount } from 'svelte';
     import { push } from 'svelte-spa-router';
+    import { signOut } from "../../libs/cord_utils";
     import cordelia_storage from "../../libs/local_storage";
 
     let courses = cordelia_storage.Courses;
     
     onMount(() => {
+        console.log("Mounting index page");
+
         if (cordelia_storage.Token === "") {
             push('/login');
             return;
@@ -21,14 +24,31 @@
             if (token) {
                 const request = new GetCustomerCoursesRequest();
                 request.token = token;
-                request.do(data => {
+
+                const on_success = data => {
                     courses = data;
                     cordelia_storage.Courses = data;
-                });
+                };
+
+                const on_error = error_code => {
+                    switch (error_code) {
+                        case 401:
+                        case 402:
+                            signOut();
+                            break;
+                        default:
+                            console.log(error);
+                            break;
+                    }
+                };
+
+                request.do(on_success, on_error);
+            } else {
+                signOut();
             }
         }
 
-    })
+    });
 
     
     window.scrollTo(0, 0);

@@ -238,9 +238,9 @@
         overflow-y: auto;
     }
 
-    #cds-cl-lectures-container::-webkit-scrollbar {
+    /* #cds-cl-lectures-container::-webkit-scrollbar {
         width: 0;
-    }
+    } */
 
     .lecture-item {
         display: flex;

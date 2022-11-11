@@ -1,5 +1,6 @@
 // import { CheckToken } from '../types/Http_messages';
 import { push } from 'svelte-spa-router';
+import cordelia_storage from './local_storage';
 import Cookies from 'js-cookie';
 
 export const isMobile = () => {
@@ -34,6 +35,11 @@ export const getUrlPARAM = key => {
     let url = new URL(url_string);
     return url.searchParams.get(key);
 
+}
+
+export const signOut = () => {
+    cordelia_storage.removeToken();
+    push('/login');
 }
 
 export const validateToken = () => {
